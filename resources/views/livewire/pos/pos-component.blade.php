@@ -11,11 +11,12 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-2">
+                    <div class="col-3">
                         <a href="javascript:void(0);" class="btn btn-adds" data-bs-toggle="modal"
-                        data-bs-target="#create"><i class="fa fa-folder-open me-2"></i>Ouvrir caisse</a>
+                        data-bs-target="#create"><i class="fa fa-plus-circle me-2"></i>
+                        Ouvrir caisse</a>
                     </div>
-                    <div class="col-10">
+                    <div class="col-9">
                         <div class="dash-widget dash1 justify-between">
                             <div class="dash-widgetimg">
                                 <span><img src="{{ asset('assets/img/icons/dash2.svg') }}" alt="img"></span>
