@@ -7,7 +7,7 @@
                         <h6 class="submenu-hdr">Tableau de Bord</h6>
                         <ul>
                             <li class="@if (Route::currentRouteName() == 'dashboard') active @endif">
-                                <a href="{{ route('dashboard') }}"><i data-feather="grid"></i><span>Dashboard</span></a>
+                                <a href="{{ route('dashboard') }}" wire:navigate><i data-feather="grid"></i><span>Dashboard</span></a>
                             </li>
                         </ul>
                     </li>
@@ -15,11 +15,11 @@
                         <h6 class="submenu-hdr">Gestion Produits</h6>
                         <ul>
                             <li class="@if (Route::currentRouteName() == 'listeProduits') active @endif">
-                                <a href="{{ route('listeProduits') }}"><i data-feather="box"></i><span>Produits</span></a>
+                                <a href="{{ route('listeProduits') }}" wire:navigate><i data-feather="box"></i><span>Produits</span></a>
                             </li>
-                            <li class="@if (Route::currentRouteName() == 'createProduits') active @endif"><a
-                                    href="{{ route('createProduits') }}"><i data-feather="plus-square"></i><span>Create
-                                        Product</span></a></li>
+                            {{-- <li class="@if (Route::currentRouteName() == 'createProduits') active @endif"><a
+                                    href="{{ route('createProduits') }}" wire:navigate><i data-feather="plus-square"></i><span>Create
+                                        Product</span></a></li> --}}
                             <li><a href="categorylist.html"><i data-feather="codepen"></i><span>Categories</span></a></li>
                             <li><a href="brandlist.html"><i data-feather="tag"></i><span>Units</span></a></li>
                             <li><a href="barcode.html"><i data-feather="align-justify"></i><span>Code Bar</span></a></li>

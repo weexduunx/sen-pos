@@ -1,4 +1,3 @@
-<div>
     <div>
         <div class="content">
             <div class="page-header">
@@ -153,13 +152,13 @@
                                         <td>{{ $produit->created_at }}</td>
                                         <td>
                                             <a class="me-3" href="product-details.html">
-                                                <img src="{{asset('assets/img/icons/eye.svg')}}" alt="img">
+                                                <img src="{{ asset('assets/img/icons/eye.svg') }}" alt="img">
                                             </a>
                                             <a class="me-3" href="editproduct.html">
-                                                <img src="{{asset('assets/img/icons/edit.svg')}}" alt="img">
+                                                <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
                                             </a>
                                             <a class="confirm-text" href="javascript:void(0);">
-                                                <img src="{{asset('assets/img/icons/delete.svg')}}" alt="img">
+                                                <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
                                             </a>
                                         </td>
                                     </tr>
@@ -172,7 +171,8 @@
             <!-- /product list -->
         </div>
         <!-- Modal Create -->
-        <div wire:ignore.self class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div wire:ignore.self class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -210,14 +210,15 @@
                                                 <input type="text" wire:model='prixVente'>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-sm-6 col-12">
+                                        <div class="col-lg-4 col-sm-6 col-12">
                                             <div class="form-group">
-                                                <label >Catégorie</label>
+                                                <label>Catégorie</label>
                                                 <div>
-                                                    <select class="form-select  select2" wire:model='categorie_id'>
-                                                        <option >-- Select --</option>
+                                                    <select class="form-select" wire:model='categorie_id'>
+                                                        <option>-- Choisissez une catégorie --</option>
                                                         @foreach ($categories as $category)
-                                                            <option value="{{ $category->id }}">{{ $category->nomCategorie }}</option>
+                                                            <option value="{{ $category->id }}">
+                                                                {{ $category->nomCategorie }}</option>
                                                         @endforeach
                                                     </select>
                                                     <div>
@@ -227,29 +228,16 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            {{-- <div class="form-group">
-                                                <label>Catégorie</label>
-                                                <select class="" wire:model='categorieId'>
-                                                    <option>Choose Category</option>
-                                                    @foreach ($categories as $category)
-                                                        <option value="{{ $category->id }}">{{ $category->nomCategorie }}</option>
-                                                    @endforeach
-                                                </select>
-                                                <div>
-                                                    @error('categorieId')
-                                                        <span class="error">{{ $message }}</span>
-                                                    @enderror
-                                                </div>
-                                            </div> --}}
                                         </div>
-                
-                                        <div class="col-lg-3 col-sm-6 col-12">
+
+                                        <div class="col-lg-4 col-sm-6 col-12">
                                             <div class="form-group">
                                                 <label>Sous Catégorie</label>
-                                                <select class="" wire:model='sousCategorie_id'>
+                                                <select class="form-select" wire:model='sousCategorie_id'>
                                                     <option>Choose Sub Category</option>
                                                     @foreach ($sousCategories as $sousCategorie)
-                                                        <option value="{{ $sousCategorie->id }}">{{ $sousCategorie->libelle }}</option>
+                                                        <option value="{{ $sousCategorie->id }}">
+                                                            {{ $sousCategorie->libelle }}</option>
                                                     @endforeach
                                                 </select>
                                                 <div>
@@ -259,82 +247,72 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-sm-6 col-12">
+                                        <div class="col-lg-4 col-sm-6 col-12">
                                             <div class="form-group">
                                                 <label>Marque</label>
-                                                <select class="" wire:model='marqueProduit'>
+                                                <select class="form-select" wire:model='marqueProduit'>
                                                     <option>Choose Brand</option>
                                                     <option value="sympa">Sympa</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-sm-6 col-12">
+                                        <div class="col-lg-4 col-sm-6 col-12">
                                             <div class="form-group">
                                                 <label>Code Bar</label>
                                                 <input type="text" wire:model='codeBar'>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-sm-6 col-12">
+                                        <div class="col-lg-4 col-sm-6 col-12">
                                             <div class="form-group">
                                                 <label>Unité</label>
-                                                <select class="" wire:model='unit_id'>
+                                                <select class="form-select" wire:model='unit_id'>
                                                     <option>Choose Unit</option>
                                                     <option value="unit">Unit</option>
                                                     <option value="kg">kg</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-sm-6 col-12">
+                                        <div class="col-lg-4 col-sm-6 col-12">
                                             <div class="form-group">
                                                 <label>Seuil</label>
                                                 <input type="text" wire:model='alertStock'>
                                             </div>
                                         </div>
-                
-                                        <div class="col-lg-3 col-sm-6 col-12">
+
+                                        <div class="col-lg-2 col-sm-6 col-12">
                                             <div class="form-group">
                                                 <label>Quantité</label>
                                                 <input type="text" wire:model='quatite'>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-sm-6 col-12">
+                                        <div class="col-lg-2 col-sm-6 col-12">
                                             <div class="form-group">
                                                 <label> Status</label>
-                                                <select class="" wire:model='status'>
+                                                <select class="form-select" wire:model='status'>
                                                     <option value="0">Closed</option>
                                                     <option value="1">Open</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-8">
                                             <div class="form-group">
                                                 <label>Description</label>
                                                 <textarea class="form-control" wire:model='description'></textarea>
                                             </div>
                                         </div>
-                
-                                        <div class="col-lg-6">
-                                            {{-- <div class="form-group">
-                                                <label>File Input</label>
-                                                <div >
-                                                    <input class="form-control" type="file"  wire:model="image">
-                                                    @if ($image)
-                                                        <img src="{{ $image->temporaryUrl() }}" width="100" height="100"
-                                                                alt="img">
-                                                    @endif
-                                                    @error('image') <span class="error">{{ $message }}</span> @enderror
-                                                </div>
-                                            </div> --}}
+
+                                        <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label> Product Image</label>
                                                 <div class="image-upload">
                                                     <input type="file" wire:model="image">
                                                     <div class="image-uploads">
                                                         @if ($image)
-                                                            <img src="{{ $image->temporaryUrl() }}" width="80" height="80"
-                                                                alt="img">
+                                                            <img src="{{ $image->temporaryUrl() }}" width="80"
+                                                                height="80" alt="img">
                                                         @else
-                                                            <img src="{{ asset('assets/img/icons/upload.svg') }}" alt="img">
+                                                            <img src="{{ asset('assets/img/icons/upload.svg') }}"
+                                                                alt="img">
                                                             <h4>Drag and drop a file to upload</h4>
                                                         @endif
                                                     </div>
@@ -342,8 +320,8 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
-                                            <button class="btn btn-submit me-2" type="submit" wire:loading.attr="disabled"
-                                                wire:target="create">Submit
+                                            <button class="btn btn-submit me-2" type="submit"
+                                                wire:loading.attr="disabled" wire:target="create">Submit
                                                 <div wire:loading>
                                                     <div class="spinner-border" role="status">
                                                         <span class="sr-only">Loading...</span>
@@ -351,8 +329,6 @@
                                                 </div>
                                             </button>
                                             <button class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                                            {{-- <a href="javascript:void(0);" class="btn btn-submit me-2">Submit</a>
-                                        <a href="productlist.html" class="btn btn-cancel">Cancel</a> --}}
                                         </div>
                                     </div>
                                 </form>
@@ -363,17 +339,16 @@
                 </div>
             </div>
         </div>
-    </div>
 
 </div>
 @push('scripts')
-<script>
-    window.addEventListener('alert', event => {
-    toastr[event.detail.type](event.detail.message,
-    event.detail.title ?? ''), toastr.options = {
-    "closeButton": true,
-    "progressBar": true,
-    }
-    });
+    <script>
+        window.addEventListener('alert', event => {
+            toastr[event.detail.type](event.detail.message,
+                event.detail.title ?? ''), toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+            }
+        });
     </script>
 @endpush

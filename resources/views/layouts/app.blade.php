@@ -18,7 +18,10 @@
 
         <!-- Animation CSS -->
         <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/plugins/owlcarousel/owl.carousel.min.css')}}">
+        <link rel="stylesheet" href="{{ asset('assets/plugins/owlcarousel/owl.theme.default.min.css')}}">
         <link rel="stylesheet" href="{{ asset('assets/css/select2.css') }}">
+        <link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css">
         <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/toatr.css')}}">
         <!-- Datatable CSS -->
         <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap4.min.css') }}">
@@ -38,8 +41,8 @@
         <div id="global-loader">
             <div class="whirly-loader"> </div>
         </div>
-            <!-- Main Wrapper -->
-    <div class="main-wrapper min-h-screen">
+    <!-- Main Wrapper -->
+    <div class="@if (route('pos') == url()->current()) main-wrappers @else main-wrapper @endif">
         <!-- Page Heading -->
         @if (isset($header))
             <header class="bg-white shadow">
@@ -49,35 +52,43 @@
             </header>
         @endif
         <!-- Header -->
-        <livewire:layout.header />
+        @if (route('pos') == url()->current()) 
+            <livewire:layout.pos-header />
+        @else
+            <livewire:layout.header />
+        @endif
         <!-- Header -->
 
         <!-- Sidebar -->
-        <livewire:layout.sidebar />
+        @if (route('pos') !== url()->current())
+            <livewire:layout.sidebar />
+        @endif
         <!-- /Sidebar -->
-        <main>
-            <div class="page-wrapper">
-                {{ $slot }}
-            </div>
-        </main>
+        <div class="page-wrapper @if (route('pos') == url()->current()) ms-0 @endif" @if (route('pos') == url()->current()) style="min-height: 731px;" @endif >
+            {{ $slot }}
+        </div>
     </div>
     <!-- /Main Wrapper -->
+ 
     <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ asset('assets/js/select2.js') }}"></script>
-
     <!-- Feather Icon JS -->
     <script src="{{ asset('assets/js/feather.min.js') }}"></script>
 
     <!-- Slimscroll JS -->
     <script src="{{ asset('assets/js/jquery.slimscroll.min.js') }}"></script>
+    <!-- Bootstrap Core JS -->
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Datatable JS -->
     <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}"></script>
-
-    <!-- Bootstrap Core JS -->
-    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-
+    <!-- Select2 JS -->
+    <script src="{{ asset('assets/plugins/select2/js/select2.min.js')}}"></script>
+    <!-- Owl JS -->
+    <script src="{{ asset('assets/plugins/owlcarousel/owl.carousel.min.js')}}"></script>
+    <!-- Sweetalert 2 -->
+    <script src="{{ asset('assets/plugins/sweetalert/sweetalert2.all.min.js')}}"></script>
+    <script src="{{ asset('assets/plugins/sweetalert/sweetalerts.min.js')}}"></script>
     <!-- Toastr -->
     <script src="{{ asset('assets/plugins/toastr/toastr.min.js')}}"></script>
     <script src="{{ asset('assets/plugins/toastr/toastr.js')}}"></script>
