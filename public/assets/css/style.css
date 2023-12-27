@@ -3736,7 +3736,7 @@ hr {
   font-size: 12px;
 }
 .user-info .user-letter {
-  background: #1B2950;
+  /* background: #1B2950; */
   color: #fff;
   width: 42px;
   height: 42px;

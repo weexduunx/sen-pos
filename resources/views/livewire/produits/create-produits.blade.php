@@ -47,20 +47,7 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- <div class="form-group">
-                                <label>Catégorie</label>
-                                <select class="" wire:model='categorieId'>
-                                    <option>Choose Category</option>
-                                    @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->nomCategorie }}</option>
-                                    @endforeach
-                                </select>
-                                <div>
-                                    @error('categorieId')
-                                        <span class="error">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div> --}}
+   
                         </div>
 
                         <div class="col-lg-3 col-sm-6 col-12">
@@ -134,17 +121,7 @@
                         </div>
 
                         <div class="col-lg-6">
-                            {{-- <div class="form-group">
-                                <label>File Input</label>
-                                <div >
-                                    <input class="form-control" type="file"  wire:model="image">
-                                    @if ($image)
-                                        <img src="{{ $image->temporaryUrl() }}" width="100" height="100"
-                                                alt="img">
-                                    @endif
-                                    @error('image') <span class="error">{{ $message }}</span> @enderror
-                                </div>
-                            </div> --}}
+
                             <div class="form-group">
                                 <label> Product Image</label>
                                 <div class="image-upload">

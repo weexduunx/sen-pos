@@ -1,4 +1,4 @@
-    <ul class="nav user-menu" wire:ignore.self>
+    <ul class="nav user-menu" wire:poll.15s>
         <!-- Search -->
         <li class="nav-item nav-searchinputs">
             <div class="top-nav-search">
@@ -154,7 +154,7 @@
             <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
                 <span class="user-info">
                     <span class="user-letter">
-                        <img src="{{ asset('assets/img/profiles/avator1.jpg') }}" alt="" class="img-fluid">
+                        <img src="{{ asset('storage/' . auth()->user()->image) }}" alt="" class="img-fluid">
                     </span>
                     <span class="user-detail">
                         <span class="user-name">{{ auth()->user()->name }}</span>
@@ -166,7 +166,7 @@
 
                 <div class="profilename">
                     <div class="profileset">
-                        <span class="user-img"><img src="{{ asset('assets/img/profiles/avator1.jpg') }}"
+                        <span class="user-img"><img src="{{ asset('storage/' . auth()->user()->image) }}"
                                 alt="">
                             <span class="status online"></span></span>
                         <div class="profilesets">
