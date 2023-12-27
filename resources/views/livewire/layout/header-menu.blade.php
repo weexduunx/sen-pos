@@ -1,4 +1,4 @@
-    <ul class="nav user-menu" wire:poll.15s>
+    <ul class="nav user-menu">
         <!-- Search -->
         <li class="nav-item nav-searchinputs">
             <div class="top-nav-search">
@@ -162,7 +162,7 @@
                     </span>
                 </span>
             </a>
-            <div class="dropdown-menu menu-drop-user">
+            <div class="dropdown-menu menu-drop-user" wire:init>
 
                 <div class="profilename">
                     <div class="profileset">

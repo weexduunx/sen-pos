@@ -76,9 +76,6 @@ class CreateProduits extends Component
         );
 
         $produit->save();
-
-
-
         $this->resetFields();
     }
 

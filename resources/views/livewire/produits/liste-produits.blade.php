@@ -337,8 +337,11 @@
                 </div>
             </div>
         </div>
+        <x-action-message class="me-3" on="alert">
+            {{ __('Saved successfully.') }}
+        </x-action-message>
     </div>
-    @push('scripts')
+    {{-- @push('scripts')
         <script>
             window.addEventListener('alert', event => {
                 toastr[event.detail.type](event.detail.message,
@@ -348,4 +351,4 @@
                 }
             });
         </script>
-    @endpush
+    @endpush --}}

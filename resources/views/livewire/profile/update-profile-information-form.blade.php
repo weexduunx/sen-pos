@@ -36,7 +36,7 @@ new class extends Component {
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($user->id)],
             'image' => ['image','max:1024'],
         ]);
-
+        try {
         $user->fill($validated);
 
         if ($user->isDirty('email')) {
@@ -51,7 +51,11 @@ new class extends Component {
             $user->save();
         }
 
-        $this->dispatch('profile-updated', name: $user->name);
+        // $this->dispatch('profile-updated', name: $user->name);
+        $this->dispatch('alert', ['type' => 'success', 'message' => 'Saved successfully.']);
+        } catch (\Exception $e) {
+        $this->dispatch('alert', ['type' => 'error', 'message' => 'An error occurred. Please try again.']);
+        }
     }
 
     /**
@@ -198,10 +202,10 @@ new class extends Component {
                         <input wire:model="image" id="image" name="image" type="file">
                         <div class="image-uploads">
                             @if($image !== auth()->user()->image)
-                            <img src="{{ $image->temporaryUrl() }}" width="180" height="180"
+                            <img src="{{ $image->temporaryUrl() }}" width="200" height="200"
                                 alt="img">
                             @elseif(auth()->user()->image)
-                            <img src="{{ asset('storage/' . auth()->user()->image) }}" width="180" height="180" alt="profil-img">
+                            <img src="{{ asset('storage/' . auth()->user()->image) }}" width="200" height="200" alt="profil-img">
                             @else
                             <img src="{{ asset('assets/img/icons/upload.svg') }}" alt="img">
                             <h4>Drag and drop a file to upload</h4>
@@ -216,8 +220,8 @@ new class extends Component {
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
 
-            <x-action-message class="me-3" on="profile-updated">
-                {{ __('Saved.') }}
+            <x-action-message class="me-3" on="alert">
+                {{ __('Saved successfully.') }}
             </x-action-message>
         </div>
     </form>

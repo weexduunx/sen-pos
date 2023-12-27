@@ -76,7 +76,6 @@ class ListeProduits extends Component
         );
 
         $produit->save();
-
         $this->dispatch(
             'alert',
             ['type' => 'success',  'message' => 'User Created Successfully!']

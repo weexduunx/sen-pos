@@ -148,8 +148,6 @@
                                 </div>
                             </button>
                             <button class="btn btn-cancel">Cancel</button>
-                            {{-- <a href="javascript:void(0);" class="btn btn-submit me-2">Submit</a>
-                        <a href="productlist.html" class="btn btn-cancel">Cancel</a> --}}
                         </div>
                     </div>
                 </form>
