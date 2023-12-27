@@ -1,11 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h4>
             {{ __('Dashboard') }}
-        </h2>
+        </h4>
     </x-slot>
-
-    <div class="content">
         <div class="row">
             <div class="col-lg-3 col-sm-6 col-12">
                 <div class="dash-widget">
@@ -285,5 +283,4 @@
                 </div>
             </div>
         </div>
-    </div>
 </x-app-layout>

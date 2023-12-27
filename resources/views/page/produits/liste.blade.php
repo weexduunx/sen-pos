@@ -1,8 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Liste Produit') }}
-        </h2>
+        <h4>{{ __('Product List') }}</h4>
+        <h6>{{ __("Manage your products") }}</h6>
     </x-slot>
     <livewire:produits.liste-produits />
 </x-app-layout>  

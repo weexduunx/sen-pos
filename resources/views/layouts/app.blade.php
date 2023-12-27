@@ -35,7 +35,7 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+       
     </head>
     <body class="font-sans antialiased">
         <div id="global-loader">
@@ -43,14 +43,7 @@
         </div>
     <!-- Main Wrapper -->
     <div class="@if (route('pos') == url()->current()) main-wrappers @else main-wrapper @endif">
-        <!-- Page Heading -->
-        @if (isset($header))
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-        @endif
+
         <!-- Header -->
         @if (route('pos') == url()->current()) 
             <livewire:layout.pos-header />
@@ -65,7 +58,17 @@
         @endif
         <!-- /Sidebar -->
         <div class="page-wrapper @if (route('pos') == url()->current()) ms-0 @endif" @if (route('pos') == url()->current()) style="min-height: 731px;" @endif >
+            <div class="content">
+                <!-- Page Heading -->
+                @if (isset($header))
+                <div class="page-header">
+                    <div class="page-title">
+                        {{ $header }}
+                    </div>
+                </div>
+                @endif
             {{ $slot }}
+            </div>
         </div>
     </div>
     <!-- /Main Wrapper -->
