@@ -37,5 +37,6 @@
             </div>
         </div>
     </div> --}}
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
 </x-app-layout>
+@vite(['resources/css/app.css', 'resources/js/app.js'])

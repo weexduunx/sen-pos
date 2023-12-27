@@ -162,7 +162,7 @@
                     </span>
                 </span>
             </a>
-            <div class="dropdown-menu menu-drop-user" wire:init>
+            <div class="dropdown-menu menu-drop-user">
 
                 <div class="profilename">
                     <div class="profileset">
