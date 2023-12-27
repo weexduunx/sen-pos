@@ -36,8 +36,87 @@ new #[Layout('layouts.guest')] class extends Component
         $this->redirect(RouteServiceProvider::HOME, navigate: true);
     }
 }; ?>
-
-<div>
+<div class="login-wrapper">
+    <div class="login-content">
+        <div class="login-userset">
+            <div class="login-logo logo-normal">
+                <img src="{{ asset('assets/img/logo-senpos.png')}}" alt="img">
+            </div>
+            <a href="index.html" class="login-logo logo-white">
+                <img src="{{ asset('assets/img/logo-white-senpos.png')}}"  alt="">
+            </a>
+            <div class="login-userheading">
+                <h3>Create an Account</h3>
+                <h4>Continue where you left off</h4>
+            </div>
+            <form wire:submit="register">
+            <div class="form-login">
+                <label>Full Name</label>
+                <div class="form-addons">
+                    <input wire:model="name" id="name" name="name" required autofocus autocomplete="full name" type="text" placeholder="Enter your full name">
+                    <img src="assets/img/icons/users1.svg" alt="img">
+                    <x-input-error :messages="$errors->get('name')" class="mt-2 alert alert-danger alert-dismissible fade show" />
+                </div>
+            </div>
+            <div class="form-login">
+                <label>Email</label>
+                <div class="form-addons">
+                    <input type="email" name="email" required autocomplete="username"  wire:model="email" id="email" placeholder="Enter your email address">
+                    <img src="assets/img/icons/mail.svg" alt="img">
+                    <x-input-error :messages="$errors->get('email')" class="mt-2 alert alert-danger alert-dismissible fade show" />
+                </div>
+            </div>
+            <div class="form-login">
+                <label>Password</label>
+                <div class="pass-group">
+                    <input wire:model="password" id="password" type="password" name="password"
+                    required autocomplete="new-password" class="pass-input" placeholder="Enter your password">
+                    <span class="fas toggle-password fa-eye-slash"></span>
+                    <x-input-error :messages="$errors->get('password')" class="mt-2 alert alert-danger alert-dismissible fade show" />
+                </div>
+            </div>
+            <div class="form-login">
+                <label for="password_confirmation">Confirm Password</label>
+                <div class="pass-group">
+                    <input wire:model="password_confirmation" id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password" class="pass-input" placeholder="confirm your password">
+                    <span class="fas toggle-password fa-eye-slash"></span>
+                    <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2 alert alert-danger alert-dismissible fade show" /> 
+                </div>
+            </div>
+            <div class="form-login">
+                <button class="btn btn-login" type="submit">Sign Up</button>
+                {{-- <a class="btn btn-login">Sign Up</a> --}}
+            </div>
+            </form>
+            <div class="signinform text-center">
+                <h4>Already a user? <a  href="{{ route('login') }}" wire:navigate class="hover-a">Sign In</a></h4>
+            </div>
+            <div class="form-setlogin">
+                <h4>Or sign up with</h4>
+            </div>
+            <div class="form-sociallink">
+                <ul>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <img src="{{ asset('assets/img/icons/google.png')}}" class="me-2" alt="google">
+                            Sign Up using Google
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);">
+                            <img src="{{ asset('assets/img/icons/facebook.png')}}" class="me-2" alt="google">
+                            Sign Up using Facebook
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="login-img">
+        <img src="{{ asset('assets/img/login.jpg')}}" alt="img">
+    </div>
+</div>
+{{-- <div>
     <form wire:submit="register">
         <!-- Name -->
         <div>
@@ -86,4 +165,4 @@ new #[Layout('layouts.guest')] class extends Component
             </x-primary-button>
         </div>
     </form>
-</div>
+</div> --}}

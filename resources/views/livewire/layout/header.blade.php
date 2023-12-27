@@ -1,5 +1,5 @@
 <div>
-    <div class="header">
+    <div class="header ">
         <!-- Logo -->
         <div class="header-left active">
             <a href="index.html" class="logo logo-normal">

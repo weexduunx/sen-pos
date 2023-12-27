@@ -1,5 +1,4 @@
-
-    <ul class="nav user-menu">
+    <ul class="nav user-menu" wire:ignore.self>
         <!-- Search -->
         <li class="nav-item nav-searchinputs">
             <div class="top-nav-search">
@@ -158,24 +157,36 @@
                         <img src="{{ asset('assets/img/profiles/avator1.jpg') }}" alt="" class="img-fluid">
                     </span>
                     <span class="user-detail">
-                        <span class="user-name">John Smilga</span>
+                        <span class="user-name">{{ auth()->user()->name }}</span>
                         <span class="user-role">Super Admin</span>
                     </span>
                 </span>
             </a>
             <div class="dropdown-menu menu-drop-user">
+
                 <div class="profilename">
                     <div class="profileset">
                         <span class="user-img"><img src="{{ asset('assets/img/profiles/avator1.jpg') }}"
                                 alt="">
                             <span class="status online"></span></span>
                         <div class="profilesets">
-                            <h6>John Smilga</h6>
+                            <h6>{{ auth()->user()->name }}</h6>
                             <h5>Super Admin</h5>
                         </div>
                     </div>
                     <hr class="m-0">
-                    <a class="dropdown-item" href="profile.html"> <i class="me-2" data-feather="user"></i> My
+                    <x-slot name="trigger">
+                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                            <div x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
+    
+                            <div class="ms-1">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        </button>
+                    </x-slot>
+                    <a class="dropdown-item" href="{{route('profile')}}" wire:navigate> <i class="me-2" data-feather="user"></i> My
                         Profile</a>
                     <a class="dropdown-item" href="generalsettings.html"><i class="me-2"
                             data-feather="settings"></i>Settings</a>

@@ -5,26 +5,42 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'senPos') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
+		<!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.png')}}">
+		
+		<!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css')}}">
+		
+        <!-- Fontawesome CSS -->
+		<link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/fontawesome.min.css')}}">
+		<link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/all.min.css')}}">
+		
+		<!-- Main CSS -->
+        <link rel="stylesheet" href="{{ asset('assets/css/style.css')}}">
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/" wire:navigate>
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
-
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+    <body class="account-page antialiased">
+        <div class="main-wrapper">
+            <div class="account-content">
                 {{ $slot }}
             </div>
         </div>
+        <!-- jQuery -->
+        <script src="{{ asset('assets/js/jquery-3.6.0.min.js')}}"></script>
+
+         <!-- Feather Icon JS -->
+		<script src="{{ asset('assets/js/feather.min.js')}}"></script>
+		
+		<!-- Bootstrap Core JS -->
+        <script src="{{ asset('assets/js/bootstrap.bundle.min.js')}}"></script>
+		
+		<!-- Custom JS -->
+		<script src="{{ asset('assets/js/script.js')}}"></script>
     </body>
 </html>
