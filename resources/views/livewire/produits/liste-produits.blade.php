@@ -358,7 +358,7 @@
     </div>
     <!-- /Modal Create-->
     <!-- Modal Détails produits -->
-    <div wire:ignore.self class="modal modal1 fade" id="detailModal" wire:model="produitDetails" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+    <div wire:model="produitDetails" class="modal modal1 fade" id="detailModal"  tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -421,27 +421,27 @@
                                             <li>
                                                 <h4>Description</h4>
                                                 <h6>{{ $description }}</h6>
-                                            </li>
+                                            </li>  
+                                           
                                         </ul>
                                 
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-sm-12" >
+                        <div class="col-lg-4 col-sm-12">
                             <div class="card">
-                                <div class="card-body">
-                                    <div class="slider-product-details">
-                                        <div class="owl-carousel owl-theme product-slide">
-                                            <div class="slider-product">
-                                                <img src="{{ asset('storage/' . $detailImage) }}"
-                                                    alt="img">
+                                <div class="card-body ">
+                                    {{-- <img src="{{ asset('storage/' . $detailImage) }}"
+                                                alt="img">
                                                 <h4>{{ $nomProduit }}</h4>
-                                                <h6>581kb</h6>
-                                            </div>
+                                                <h6>581kb</h6> --}}
+                                    <div class="slider-product-details">
+                                        <div wire:ignore.self  class="owl-carousel owl-theme product-slide" wire:after="initOwlCarousel">
                                             <div class="slider-product">
+                                                
                                                 <img src="{{ asset('storage/' . $detailImage) }}"
-                                                    alt="img">
+                                                alt="img">
                                                 <h4>{{ $nomProduit }}</h4>
                                                 <h6>581kb</h6>
                                             </div>
@@ -461,5 +461,8 @@
         </div>
     </div>
 </div>
+@push('scripts')
+    <script src="{{ asset('assets/plugins/owlcarousel/owl.carousel.min.js') }}"></script>
+@endpush
 
 
