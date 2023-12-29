@@ -59,4 +59,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/laravel-user-management', UserManagement::class)->name('user-management');
     Route::get('/pos', PosComponent::class)->name('pos');
     Route::get('/listeProduits', ListeProduits::class)->name('listeProduits');
+    // Route::get('/listeProduits/{id}', [ListeProduits::class, 'details'])->name('produits.details');
 });

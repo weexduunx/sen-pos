@@ -105,17 +105,24 @@
                 $('#createModal').modal('hide');
             });
         });
-    </script>
-
-    @livewireScripts
-    <script>
         document.addEventListener('livewire:load', () => {
             Livewire.on('openDetailsModal', (event) => {
                 $('#detailModal').modal('show');
             });
 
         });
+        document.addEventListener('livewire:load', function () {
+            Livewire.on('initOwlCarousel', function () {
+                // Initialisation du carrousel Owl Carousel
+                $('.owl-carousel').owlCarousel({
+                    // Options de configuration du carrousel
+                });
+            });
+        });
+
     </script>
+    
+    @livewireScripts
 </body>
 
 </html>

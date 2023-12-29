@@ -87,32 +87,33 @@ class ListeProduits extends Component
         $this->resetFields();
     }
 
-
+    public function initOwlCarousel()
+    {
+        $this->emit('initOwlCarousel');
+    }
     public function details($id)
     {
 
-        $produit = Produit::find($id);
+        $this->produitDetails = Produit::find($id);
 
         // Vérifier si le produit a été trouvé
-        if ($produit) {
-            $this->produitDetails = $produit;
-            $this->idProduit = $produit->id;
-            $this->nomProduit = $produit->nomProduit;
-            $this->description = $produit->description;
-            $this->prixAchat = $produit->prixAchat;
-            $this->prixVente = $produit->prixVente;
-            $this->codeBar = $produit->codeBar;
-            $this->quatite = $produit->quatite;
-            $this->detailImage = $produit->image; // Assurez-vous d'ajuster le chemin
-
-            $this->alertStock = $produit->alertStock;
-            $this->sousCategorie_id = $produit->sousCategorie_id;
-            $this->nomCategorie = $produit->categorie->nomCategorie;
-            $this->unit_id = $produit->unit_id;
-            $this->marqueProduit = $produit->marqueProduit;
-            $this->status = $produit->status;
-            $this->created_at = $produit->created_at;
-            $this->emit('openDetailsModal',);
+        if ($this->produitDetails) {
+            $this->idProduit = $this->produitDetails->id;
+            $this->nomProduit = $this->produitDetails->nomProduit;
+            $this->description = $this->produitDetails->description;
+            $this->prixAchat = $this->produitDetails->prixAchat;
+            $this->prixVente = $this->produitDetails->prixVente;
+            $this->codeBar = $this->produitDetails->codeBar;
+            $this->quatite = $this->produitDetails->quatite;
+            $this->detailImage = $this->produitDetails->image; // Assurez-vous d'ajuster le chemin
+            $this->alertStock = $this->produitDetails->alertStock;
+            $this->sousCategorie_id = $this->produitDetails->sousCategorie_id;
+            $this->nomCategorie = $this->produitDetails->categorie->nomCategorie;
+            $this->unit_id = $this->produitDetails->unit_id;
+            $this->marqueProduit = $this->produitDetails->marqueProduit;
+            $this->status = $this->produitDetails->status;
+            $this->created_at = $this->produitDetails->created_at;
+            $this->emit('openDetailsModal');
         } else {
             abort(404, 'Produit non trouvé');
         }
