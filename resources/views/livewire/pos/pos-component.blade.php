@@ -11,7 +11,7 @@
                 </div> --}}
 
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-md-3 col-sm-12">
                         @if ($hasCaisse)
                             <a href="javascript:void(0);" class="btn btn-warning btn-adds" data-bs-toggle="modal" data-bs-target="#CloseCaisse">
                                 <i class="fa fa-times-circle me-2"></i> <!-- Icône de fermeture -->
@@ -28,59 +28,29 @@
                             Ouvrir caisse</a>
                         @endif
                     </div>
-                    <div class="col-9">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    {{-- <div class="col-md-4">
-                                        <div class="dash-widget dash1">
-                                            <div class="dash-widgetimg">
-                                                <span><img src="{{ asset('assets/img/icons/dash2.svg') }}" alt="img"></span>
-                                            </div>
-                                            <div class="dash-widgetcontent">
-                                                <h5>1000000<span> FCFA</span></h5>
-                                                <h6>Ouverture</h6>
-                                            </div>
-                                        </div>
-                                    </div> --}}
-                                    <div class="col-md-4">
-                                        <div class="dash-widget dash2">
-                                            <div class="dash-widgetimg">
-                                                <span><img src="{{ asset('assets/img/icons/dash3.svg') }}" alt="img"></span>
-                                            </div>
-                                            <div class="dash-widgetcontent">
-                                                <h5>50</h5>
-                                                <h6>Ventes</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="dash-widget dash2">
-                                            <div class="dash-widgetimg">
-                                                <span><img src="{{ asset('assets/img/icons/dash1.svg') }}" alt="img"></span>
-                                            </div>
-                                            <div class="dash-widgetcontent">
-                                                <h5>40000</h5>
-                                                <h6>Montant Ventes</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="dash-widget dash2">
+                            <div class="dash-widgetimg">
+                                <span><img src="{{ asset('assets/img/icons/dash3.svg') }}" alt="img"></span>
+                            </div>
+                            <div class="dash-widgetcontent">
+                                <h5>50</h5>
+                                <h6>Ventes</h6>
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="col-9">
-                        <div class="dash-widget dash1 justify-between">
+                    <div class="col-md-5 col-sm-12">
+                        <div class="dash-widget dash2">
                             <div class="dash-widgetimg">
-                                <span><img src="{{ asset('assets/img/icons/dash2.svg') }}" alt="img"></span>
+                                <span><img src="{{ asset('assets/img/icons/dash1.svg') }}" alt="img"></span>
                             </div>
                             <div class="dash-widgetcontent">
-                                <h5>$<span class="counters" data-count="4385.00">4385</span></h5>
-                                <h6>Total Sales Due</h6>
+                                <h5>40000</h5>
+                                <h6>Montant Ventes</h6>
                             </div>
-                           
                         </div>
-                    </div> --}}
+                    </div>
+
                 </div>
                 {{-- Liviwirere  Categories--}}
                 @livewire('pos.categories.categories')
