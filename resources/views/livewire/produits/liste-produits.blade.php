@@ -272,8 +272,10 @@
                                             <label>Unité</label>
                                             <select class="form-select" wire:model='unit_id'>
                                                 <option>Choose Unit</option>
-                                                <option value="unit">Unit</option>
-                                                <option value="kg">kg</option>
+                                                <option value="métre">métre</option>
+                                                <option value="pouce">"</option>
+                                                <option value="50 kg"> 50 kg</option>
+                                                <option value="25 kg"> 25 kg</option>
                                             </select>
                                             @error('unit_id') <span class="error">{{ $message }}</span> @enderror
 
@@ -443,7 +445,7 @@
                                                 <img src="{{ asset('storage/' . $detailImage) }}"
                                                 alt="img">
                                                 <h4>{{ $nomProduit }}</h4>
-                                                <h6>581kb</h6>
+                                                <h6>{{ $unit_id }}</h6>
                                             </div>
                                         </div>
                                     </div>
