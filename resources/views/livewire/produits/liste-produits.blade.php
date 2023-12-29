@@ -99,7 +99,7 @@
             </div>
             <!-- /Filter -->
             <div class="table-responsive">
-                <table class="table datanew">
+                {{-- <table class="table datanew">
                     <thead>
                         <tr>
                             <th>
@@ -160,7 +160,7 @@
                             </tr>
                         @endforelse
                     </tbody>
-                </table>
+                </table> --}}
             </div>
         </div>
     </div>
