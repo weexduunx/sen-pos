@@ -118,6 +118,23 @@ class ListeProduits extends Component
             abort(404, 'Produit non trouvé');
         }
     }
+
+    public function edit($id)
+    {
+        $this->produitDetails = Produit::find($id);
+        $this->nomProduit = $this->produitDetails->nomProduit;
+        $this->description = $this->produitDetails->description;
+        $this->prixAchat = $this->produitDetails->prixAchat;
+        $this->prixVente = $this->produitDetails->prixVente;
+        $this->codeBar = $this->produitDetails->codeBar;
+        $this->quatite = $this->produitDetails->quatite;
+        $this->alertStock = $this->produitDetails->alertStock;
+        $this->sousCategorie_id = $this->produitDetails->sousCategorie_id;
+        $this->unit_id = $this->produitDetails->unit_id;
+        $this->marqueProduit = $this->produitDetails->marqueProduit;
+        $this->status = $this->produitDetails->status;
+        $this->emit('openEditModal');
+    }
     public function fermer()
     {
         $this->emit('fermerModal');

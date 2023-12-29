@@ -111,6 +111,12 @@
             });
 
         });
+        document.addEventListener('livewire:load', () => {
+            Livewire.on('openEditModal', (event) => {
+                $('#editModal').modal('show');
+            });
+
+        });
         document.addEventListener('livewire:load', function () {
             Livewire.on('initOwlCarousel', function () {
                 // Initialisation du carrousel Owl Carousel
