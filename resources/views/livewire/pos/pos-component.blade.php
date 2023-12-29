@@ -2,21 +2,74 @@
     <div class="content">
         <div class="row">
             <div class="col-lg-8 col-sm-12 tabs_wrapper">
-                <div class="page-header ">
+                {{-- <div class="page-header ">
                     <div class="page-title">
                         <h4>Categories</h4>
                         <h6>Manage your purchases</h6>
                     </div>
 
-                </div>
+                </div> --}}
 
                 <div class="row">
                     <div class="col-3">
-                        <a href="javascript:void(0);" class="btn btn-adds" data-bs-toggle="modal"
-                        data-bs-target="#create"><i class="fa fa-plus-circle me-2"></i>
-                        Ouvrir caisse</a>
+                        @if ($hasCaisse)
+                            <a href="javascript:void(0);" class="btn btn-warning btn-adds" data-bs-toggle="modal" data-bs-target="#CloseCaisse">
+                                <i class="fa fa-times-circle me-2"></i> <!-- Icône de fermeture -->
+                                Fermer Caisse
+                            </a>
+            
+                            {{-- <a href="javascript:void(0);" class="btn btn-adds" data-bs-toggle="modal"
+                            data-bs-target="#CloseCaisse"><i class="fa fa-plus-circle me-2"></i>
+                            Fermer Caisse</a> --}}
+                        @else
+                        <!-- Display "Ouvrir Caisse" button if hasCaisse is false -->
+                            <a href="javascript:void(0);" class="btn btn-adds" data-bs-toggle="modal"
+                            data-bs-target="#OpenCaisse"><i class="fa fa-plus-circle me-2"></i>
+                            Ouvrir caisse</a>
+                        @endif
                     </div>
                     <div class="col-9">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    {{-- <div class="col-md-4">
+                                        <div class="dash-widget dash1">
+                                            <div class="dash-widgetimg">
+                                                <span><img src="{{ asset('assets/img/icons/dash2.svg') }}" alt="img"></span>
+                                            </div>
+                                            <div class="dash-widgetcontent">
+                                                <h5>1000000<span> FCFA</span></h5>
+                                                <h6>Ouverture</h6>
+                                            </div>
+                                        </div>
+                                    </div> --}}
+                                    <div class="col-md-4">
+                                        <div class="dash-widget dash2">
+                                            <div class="dash-widgetimg">
+                                                <span><img src="{{ asset('assets/img/icons/dash3.svg') }}" alt="img"></span>
+                                            </div>
+                                            <div class="dash-widgetcontent">
+                                                <h5>50</h5>
+                                                <h6>Ventes</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="dash-widget dash2">
+                                            <div class="dash-widgetimg">
+                                                <span><img src="{{ asset('assets/img/icons/dash1.svg') }}" alt="img"></span>
+                                            </div>
+                                            <div class="dash-widgetcontent">
+                                                <h5>40000</h5>
+                                                <h6>Montant Ventes</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- <div class="col-9">
                         <div class="dash-widget dash1 justify-between">
                             <div class="dash-widgetimg">
                                 <span><img src="{{ asset('assets/img/icons/dash2.svg') }}" alt="img"></span>
@@ -27,70 +80,74 @@
                             </div>
                            
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
-                <ul class=" tabs owl-carousel owl-theme owl-product  border-0 ">
-                    <li class="active" id="fruits">
-                        <div class="product-details ">
-                            <img src="{{ asset('assets/img/product/product62.png') }}" alt="img">
-                            <h6>Fruits</h6>
-                        </div>
-                    </li>
-                    <li id="headphone">
-                        <div class="product-details ">
-                            <img src="{{ asset('assets/img/product/product63.png') }}" alt="img">
-                            <h6>Headphones</h6>
-                        </div>
-                    </li>
-                    <li id="Accessories">
-                        <div class="product-details">
-                            <img src="{{ asset('assets/img/product/product64.png') }}" alt="img">
-                            <h6>Accessories</h6>
-                        </div>
-                    </li>
-                    <li id="Shoes">
-                        <a class="product-details">
-                            <img src="{{ asset('assets/img/product/product65.png') }}" alt="img">
-                            <h6>Shoes</h6>
-                        </a>
-                    </li>
-                    <li id="computer">
-                        <a class="product-details">
-                            <img src="{{ asset('assets/img/product/product66.png') }}" alt="img">
-                            <h6>Computer</h6>
-                        </a>
-                    </li>
-                    <li id="Snacks">
-                        <a class="product-details">
-                            <img src="{{ asset('assets/img/product/product67.png') }}" alt="img">
-                            <h6>Snacks</h6>
-                        </a>
-                    </li>
-                    <li id="watch">
-                        <a class="product-details">
-                            <img src="{{ asset('assets/img/product/product68.png') }}" alt="img">
-                            <h6>Watches</h6>
-                        </a>
-                    </li>
-                    <li id="cycle">
-                        <a class="product-details">
-                            <img src="{{ asset('assets/img/product/product61.png') }}" alt="img">
-                            <h6>Cycles</h6>
-                        </a>
-                    </li>
-                    <li id="fruits1">
-                        <div class="product-details ">
-                            <img src="{{ asset('assets/img/product/product62.png') }}" alt="img">
-                            <h6>Fruits</h6>
-                        </div>
-                    </li>
-                    <li id="headphone1">
-                        <div class="product-details ">
-                            <img src="{{ asset('assets/img/product/product63.png') }}" alt="img">
-                            <h6>Headphones</h6>
-                        </div>
-                    </li>
-                </ul>
+                {{-- Liviwirere  Categories--}}
+                @livewire('pos.categories.categories')
+                {{-- <div wire:ignore.self >
+                    <ul class=" tabs owl-carousel owl-theme owl-product  border-0 ">
+                        <li class="active" id="fruits">
+                            <div class="product-details ">
+                                <img src="{{ asset('assets/img/product/product62.png') }}" alt="img">
+                                <h6>Fruits</h6>
+                            </div>
+                        </li>
+                        <li id="headphone">
+                            <div class="product-details ">
+                                <img src="{{ asset('assets/img/product/product63.png') }}" alt="img">
+                                <h6>Headphones</h6>
+                            </div>
+                        </li>
+                        <li id="Accessories">
+                            <div class="product-details">
+                                <img src="{{ asset('assets/img/product/product64.png') }}" alt="img">
+                                <h6>Accessories</h6>
+                            </div>
+                        </li>
+                        <li id="Shoes">
+                            <a class="product-details">
+                                <img src="{{ asset('assets/img/product/product65.png') }}" alt="img">
+                                <h6>Shoes</h6>
+                            </a>
+                        </li>
+                        <li id="computer">
+                            <a class="product-details">
+                                <img src="{{ asset('assets/img/product/product66.png') }}" alt="img">
+                                <h6>Computer</h6>
+                            </a>
+                        </li>
+                        <li id="Snacks">
+                            <a class="product-details">
+                                <img src="{{ asset('assets/img/product/product67.png') }}" alt="img">
+                                <h6>Snacks</h6>
+                            </a>
+                        </li>
+                        <li id="watch">
+                            <a class="product-details">
+                                <img src="{{ asset('assets/img/product/product68.png') }}" alt="img">
+                                <h6>Watches</h6>
+                            </a>
+                        </li>
+                        <li id="cycle">
+                            <a class="product-details">
+                                <img src="{{ asset('assets/img/product/product61.png') }}" alt="img">
+                                <h6>Cycles</h6>
+                            </a>
+                        </li>
+                        <li id="fruits1">
+                            <div class="product-details ">
+                                <img src="{{ asset('assets/img/product/product62.png') }}" alt="img">
+                                <h6>Fruits</h6>
+                            </div>
+                        </li>
+                        <li id="headphone1">
+                            <div class="product-details ">
+                                <img src="{{ asset('assets/img/product/product63.png') }}" alt="img">
+                                <h6>Headphones</h6>
+                            </div>
+                        </li>
+                    </ul>
+                </div> --}}
                 <div class="tabs_container">
                     <div class="tab_content active" data-tab="fruits">
                         <div class="row ">
@@ -883,7 +940,7 @@
         </div>
     </div>
        <!-- Modal Calculator-->
-       <div class="modal fade" id="calculator" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="calculator" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -937,6 +994,71 @@
                                         src="assets/img/icons/reverse.svg" alt="img"></a>
                             </li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div  wire:ignore.self class="modal fade" id="OpenCaisse" tabindex="-1" aria-labelledby="create" aria-hidden="true">
+        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ouverture de Caisse</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Montant d'ouverture</label>
+                                <input wire:model="montantOuverture" type="number" class="form-control">
+                                @error('montantOuverture')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a wire:click="ouvrirCaisse" class="btn btn-submit me-2">Submit</a>
+                            {{-- <button wire:click="ouvrirCaisse()" class="btn btn-submit me-2" type="button">Submit</button> --}}
+                            <a class="btn btn-cancel" data-bs-dismiss="modal">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div wire:ignore.self class="modal fade" id="CloseCaisse" tabindex="-1" aria-labelledby="create" aria-hidden="true">
+        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Fermeture Caisse</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Montant Fermeture</label>
+                                <input wire:model="montantFermeture" type="number" class="form-control">
+                                @error('montantFermeture')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a wire:click="fermerCaisse" class="btn btn-submit me-2">Submit</a>
+                            {{-- <button wire:click="ouvrirCaisse()" class="btn btn-submit me-2" type="button">Submit</button> --}}
+                            <a class="btn btn-cancel" data-bs-dismiss="modal">Cancel</a>
+                        </div>
                     </div>
                 </div>
             </div>

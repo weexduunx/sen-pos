@@ -15,7 +15,7 @@ use App\Http\Livewire\StaticSignUp;
 use App\Http\Livewire\Rtl;
 
 use App\Http\Livewire\LaravelExamples\UserProfile;
-use App\Http\Livewire\LaravelExamples\UserManagement;
+use App\Http\Livewire\Users\UserManagement;
 use App\Http\Livewire\Pos\PosComponent;
 use App\Http\Livewire\Produits\CreateProduits;
 use App\Http\Livewire\Produits\ListeProduits;
@@ -58,5 +58,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/laravel-user-profile', UserProfile::class)->name('user-profile');
     Route::get('/laravel-user-management', UserManagement::class)->name('user-management');
     Route::get('/pos', PosComponent::class)->name('pos');
+    Route::get('/users',UserManagement::class)->name('users');
     Route::get('/listeProduits', ListeProduits::class)->name('listeProduits');
 });

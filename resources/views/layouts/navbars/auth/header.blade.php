@@ -2,13 +2,13 @@
     <div class="header ">
         <!-- Logo -->
         <div class="header-left active">
-            <a href="index.html" class="logo logo-normal">
+            <a href="{{route('dashboard')}}" class="logo logo-normal">
                 <img src="{{asset('assets/img/logo-senpos.png')}}"  alt="">
             </a>
-            <a href="index.html" class="logo logo-white">
+            <a href="{{route('dashboard')}}" class="logo logo-white">
                 <img src="{{asset('assets/img/logo-white-senpos.png')}}"  alt="">
             </a>
-            <a href="index.html" class="logo-small">
+            <a href="{{route('dashboard')}}" class="logo-small">
                 <img src="{{asset('assets/img/logo-small.png')}}"  alt="">
             </a>
             <a id="toggle_btn" href="javascript:void(0);">

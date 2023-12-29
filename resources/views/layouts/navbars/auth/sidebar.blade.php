@@ -78,8 +78,9 @@
                                 <a href="javascript:void(0);"><i data-feather="users"></i><span>Gérer Users</span><span
                                         class="menu-arrow"></span></a>
                                 <ul>
-                                    <li><a href="newuser.html">New User </a></li>
-                                    <li><a href="userlists.html">Users List</a></li>
+                                    <li class="@if (Route::currentRouteName() == 'users') active @endif">
+                                        <a href="{{route('users')}}">Utilisateurs </a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
