@@ -1,105 +1,207 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<x-layouts.base>
+    {{-- If the user is authenticated --}}
+    @auth()
+        {{-- If the user is authenticated on the static sign up or the sign up page --}}
+        @if (in_array(request()->route()->getName(),
+                ['static-sign-up', 'sign-up']))
+            <!-- Main Wrapper -->
+            <div class="{{ Route::currentRouteName() == 'pos' ? 'main-wrappers' : 'main-wrapper' }}">
+                <!-- Header -->
+                @if (route('pos'))
+                    @include('layouts.navbars.auth.pos-header')
+                @else
+                    @include('layouts.navbars.auth.header')
+                @endif
+                <!-- Header -->
 
-        <title>{{ config('app.name', 'SenPos') }}</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        <!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.png') }}">
-
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-
-        <!-- Animation CSS -->
-        <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/plugins/owlcarousel/owl.carousel.min.css')}}">
-        <link rel="stylesheet" href="{{ asset('assets/plugins/owlcarousel/owl.theme.default.min.css')}}">
-        <link rel="stylesheet" href="{{ asset('assets/css/select2.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datetimepicker.min.css')}}">
-        <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/toatr.css')}}">
-        <!-- Datatable CSS -->
-        <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap4.min.css') }}">
-
-        <!-- Fontawesome CSS -->
-        <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/fontawesome.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome/css/all.min.css') }}">
-
-        <!-- Main CSS -->
-        <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-        <!-- Scripts -->
-       
-    </head>
-    <body class="font-sans antialiased">
-        <div id="global-loader">
-            <div class="whirly-loader"> </div>
-        </div>
-    <!-- Main Wrapper -->
-    <div class="@if (route('pos') == url()->current()) main-wrappers @else main-wrapper @endif">
-
-        <!-- Header -->
-        @if (route('pos') == url()->current()) 
-            <livewire:layout.pos-header />
-        @else
-            <livewire:layout.header />
-        @endif
-        <!-- Header -->
-
-        <!-- Sidebar -->
-        @if (route('pos') !== url()->current())
-            <livewire:layout.sidebar />
-        @endif
-        <!-- /Sidebar -->
-        <div class="page-wrapper @if (route('pos') == url()->current()) ms-0 @endif" @if (route('pos') == url()->current()) style="min-height: 731px;" @endif >
-            <div class="content">
-                <!-- Page Heading -->
-                @if (isset($header))
-                <div class="page-header">
-                    <div class="page-title">
-                        {{ $header }}
+                <!-- Sidebar -->
+                @if (route('pos') !== url()->current())
+                    @include('layouts.navbars.auth.sidebar')
+                @endif
+                <!-- /Sidebar -->
+                {{-- @include('layouts.navbars.auth.nav-profile') --}}
+                <div class="page-wrapper {{ Route::currentRouteName() == 'pos' ? 'ms-0' : '' }}"
+                    style="{{ Route::currentRouteName() == 'pos' ? 'min-height: 731px;' : '' }}">
+                    <div class="content">
+                        <!-- Page Heading -->
+                        @if (isset($header))
+                            <div class="page-header">
+                                <div class="page-title">
+                                    {{ $header }}
+                                </div>
+                                @if (Route::currentRouteName() == 'listeProduits')
+                                    <div class="page-btn">
+                                        <button type="button" class="btn btn-added" data-bs-toggle="modal"
+                                            data-bs-target="#createModal">
+                                            <img src="{{ asset('assets/img/icons/plus.svg') }}" alt="img"
+                                                class="me-1">Add New Product
+                                        </button>
+                                    </div>
+                                @endif
+                            </div>
+                        @endif
+                        {{ $slot }}
+                        {{-- @include('layouts.footers.auth.footer') --}}
                     </div>
                 </div>
-                @endif
-            {{ $slot }}
             </div>
-        </div>
-    </div>
-    <!-- /Main Wrapper -->
- 
-    <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
-    <!-- Feather Icon JS -->
-    <script src="{{ asset('assets/js/feather.min.js') }}"></script>
+            <!-- /Main Wrapper -->
+            {{-- @include('components.plugins.fixed-plugin') --}}
+            {{-- If the user is authenticated on the static sign in or the login page --}}
+        @elseif (in_array(request()->route()->getName(),
+                ['sign-in', 'login']))
+            <!-- Main Wrapper -->
+            <div class="{{ Route::currentRouteName() == 'pos' ? 'main-wrappers' : 'main-wrapper' }}">
+                <!-- Header -->
+                @if (route('pos'))
+                    @include('layouts.navbars.auth.pos-header')
+                @else
+                    @include('layouts.navbars.auth.header')
+                @endif
+                <!-- Header -->
 
-    <!-- Slimscroll JS -->
-    <script src="{{ asset('assets/js/jquery.slimscroll.min.js') }}"></script>
-    <!-- Bootstrap Core JS -->
-    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+                <!-- Sidebar -->
+                @if (route('pos') !== url()->current())
+                    @include('layouts.navbars.auth.sidebar')
+                @endif
+                <!-- /Sidebar -->
+                {{-- @include('layouts.navbars.auth.nav-profile') --}}
+                <div class="page-wrapper {{ Route::currentRouteName() == 'pos' ? 'ms-0' : '' }}"
+                    style="{{ Route::currentRouteName() == 'pos' ? 'min-height: 731px;' : '' }}">
+                    <div class="content">
+                        <!-- Page Heading -->
+                        @if (isset($header))
+                            <div class="page-header">
+                                <div class="page-title">
+                                    {{ $header }}
+                                </div>
+                                @if (Route::currentRouteName() == 'listeProduits')
+                                    <div class="page-btn">
+                                        <button type="button" class="btn btn-added" data-bs-toggle="modal"
+                                            data-bs-target="#createModal">
+                                            <img src="{{ asset('assets/img/icons/plus.svg') }}" alt="img"
+                                                class="me-1">Add New Product
+                                        </button>
+                                    </div>
+                                @endif
+                            </div>
+                        @endif
+                        {{ $slot }}
+                        {{-- @include('layouts.footers.auth.footer') --}}
+                    </div>
+                </div>
+            </div>
+            <!-- /Main Wrapper -->
+            {{-- @include('components.plugins.fixed-plugin') --}}
+        @elseif (in_array(request()->route()->getName(),
+                ['profile', 'my-profile']))
+            <!-- Main Wrapper -->
+            <div class="{{ Route::currentRouteName() == 'pos' ? 'main-wrappers' : 'main-wrapper' }}">
+                <!-- Header -->
+                @if (route('pos'))
+                    @include('layouts.navbars.auth.pos-header')
+                @else
+                    @include('layouts.navbars.auth.header')
+                @endif
+                <!-- Header -->
 
-    <!-- Datatable JS -->
-    <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/js/dataTables.bootstrap4.min.js') }}"></script>
-    <!-- Select2 JS -->
-    <script src="{{ asset('assets/plugins/select2/js/select2.min.js')}}"></script>
-    <!-- Owl JS -->
-    <script src="{{ asset('assets/plugins/owlcarousel/owl.carousel.min.js')}}"></script>
-    <!-- Sweetalert 2 -->
-    <script src="{{ asset('assets/plugins/sweetalert/sweetalert2.all.min.js')}}"></script>
-    <script src="{{ asset('assets/plugins/sweetalert/sweetalerts.min.js')}}"></script>
-    <!-- Toastr -->
-    <script src="{{ asset('assets/plugins/toastr/toastr.min.js')}}"></script>
-    <script src="{{ asset('assets/plugins/toastr/toastr.js')}}"></script>
-    <!-- Chart JS -->
-    <script src="{{ asset('assets/plugins/apexchart/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/apexchart/chart-data.js') }}"></script>
+                <!-- Sidebar -->
+                @if (route('pos') !== url()->current())
+                    @include('layouts.navbars.auth.sidebar')
+                @endif
+                <!-- /Sidebar -->
+                {{-- @include('layouts.navbars.auth.nav-profile') --}}
+                <div class="page-wrapper {{ Route::currentRouteName() == 'pos' ? 'ms-0' : '' }}"
+                    style="{{ Route::currentRouteName() == 'pos' ? 'min-height: 731px;' : '' }}">
+                    <div class="content">
+                        <!-- Page Heading -->
+                        @if (isset($header))
+                            <div class="page-header">
+                                <div class="page-title">
+                                    {{ $header }}
+                                </div>
+                                @if (Route::currentRouteName() == 'listeProduits')
+                                    <div class="page-btn">
+                                        <button type="button" class="btn btn-added" data-bs-toggle="modal"
+                                            data-bs-target="#createModal">
+                                            <img src="{{ asset('assets/img/icons/plus.svg') }}" alt="img"
+                                                class="me-1">Add New Product
+                                        </button>
+                                    </div>
+                                @endif
+                            </div>
+                        @endif
+                        {{ $slot }}
+                        {{-- @include('layouts.footers.auth.footer') --}}
+                    </div>
+                </div>
+            </div>
+            <!-- /Main Wrapper -->
+            {{-- @include('components.plugins.fixed-plugin') --}}
+        @else
+            <!-- Main Wrapper -->
+            <div class="{{ Route::currentRouteName() == 'pos' ? 'main-wrappers' : 'main-wrapper' }}">
+                <!-- Header -->
+                @if (route('pos'))
+                    @include('layouts.navbars.auth.pos-header')
+                @else
+                    @include('layouts.navbars.auth.header')
+                @endif
+                <!-- Header -->
 
-    <!-- Custom JS -->
-    <script src="{{ asset('assets/js/script.js') }}"></script>
-    </body>
-</html>
+                <!-- Sidebar -->
+                @if (route('pos') !== url()->current())
+                    @include('layouts.navbars.auth.sidebar')
+                @endif
+                <!-- /Sidebar -->
+                {{-- @include('layouts.navbars.auth.nav-profile') --}}
+                <div class="page-wrapper {{ Route::currentRouteName() == 'pos' ? 'ms-0' : '' }}"
+                    style="{{ Route::currentRouteName() == 'pos' ? 'min-height: 731px;' : '' }}">
+                    <div class="content">
+                        <!-- Page Heading -->
+                        @if (isset($header))
+                            <div class="page-header">
+                                <div class="page-title">
+                                    {{ $header }}
+                                </div>
+                                @if (Route::currentRouteName() == 'listeProduits')
+                                    <div class="page-btn">
+                                        <button type="button" class="btn btn-added" data-bs-toggle="modal"
+                                            data-bs-target="#createModal">
+                                            <img src="{{ asset('assets/img/icons/plus.svg') }}" alt="img"
+                                                class="me-1">Add New Product
+                                        </button>
+                                    </div>
+                                @endif
+                            </div>
+                        @endif
+                        {{ $slot }}
+                        {{-- @include('layouts.footers.auth.footer') --}}
+                    </div>
+                </div>
+            </div>
+            <!-- /Main Wrapper -->
+            {{-- @include('components.plugins.fixed-plugin') --}}
+        @endif
+    @endauth
+
+    {{-- If the user is not authenticated (if the user is a guest) --}}
+    @guest
+        {{-- If the user is on the login page --}}
+        @if (
+            !auth()->check() &&
+                in_array(request()->route()->getName(),
+                    ['login']))
+            {{ $slot }}
+            {{-- If the user is on the sign up page --}}
+        @elseif (
+            !auth()->check() &&
+                in_array(request()->route()->getName(),
+                    ['sign-up']))
+            <div>
+                {{ $slot }}
+            </div>
+        @endif
+    @endguest
+
+</x-layouts.base>
