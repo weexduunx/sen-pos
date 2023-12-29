@@ -7,7 +7,7 @@
             <!-- Main Wrapper -->
             <div class="{{ Route::currentRouteName() == 'pos' ? 'main-wrappers' : 'main-wrapper' }}">
                 <!-- Header -->
-                @if (route('pos'))
+                @if (Route::currentRouteName() == 'pos')
                     @include('layouts.navbars.auth.pos-header')
                 @else
                     @include('layouts.navbars.auth.header')
@@ -15,7 +15,7 @@
                 <!-- Header -->
 
                 <!-- Sidebar -->
-                @if (route('pos') !== url()->current())
+                @if (Route::currentRouteName() !== 'pos')
                     @include('layouts.navbars.auth.sidebar')
                 @endif
                 <!-- /Sidebar -->
@@ -53,7 +53,7 @@
             <!-- Main Wrapper -->
             <div class="{{ Route::currentRouteName() == 'pos' ? 'main-wrappers' : 'main-wrapper' }}">
                 <!-- Header -->
-                @if (route('pos'))
+                @if (Route::currentRouteName() == 'pos')
                     @include('layouts.navbars.auth.pos-header')
                 @else
                     @include('layouts.navbars.auth.header')
@@ -61,7 +61,7 @@
                 <!-- Header -->
 
                 <!-- Sidebar -->
-                @if (route('pos') !== url()->current())
+                @if (Route::currentRouteName() !== 'pos')
                     @include('layouts.navbars.auth.sidebar')
                 @endif
                 <!-- /Sidebar -->
@@ -98,7 +98,7 @@
             <!-- Main Wrapper -->
             <div class="{{ Route::currentRouteName() == 'pos' ? 'main-wrappers' : 'main-wrapper' }}">
                 <!-- Header -->
-                @if (route('pos'))
+                @if (Route::currentRouteName() == 'pos')
                     @include('layouts.navbars.auth.pos-header')
                 @else
                     @include('layouts.navbars.auth.header')
@@ -106,7 +106,7 @@
                 <!-- Header -->
 
                 <!-- Sidebar -->
-                @if (route('pos') !== url()->current())
+                @if (Route::currentRouteName() !== 'pos')
                     @include('layouts.navbars.auth.sidebar')
                 @endif
                 <!-- /Sidebar -->
@@ -142,7 +142,7 @@
             <!-- Main Wrapper -->
             <div class="{{ Route::currentRouteName() == 'pos' ? 'main-wrappers' : 'main-wrapper' }}">
                 <!-- Header -->
-                @if (route('pos'))
+                @if (Route::currentRouteName() == 'pos')
                     @include('layouts.navbars.auth.pos-header')
                 @else
                     @include('layouts.navbars.auth.header')
@@ -150,11 +150,10 @@
                 <!-- Header -->
 
                 <!-- Sidebar -->
-                @if (route('pos') !== url()->current())
+                @if (Route::currentRouteName() !== 'pos')
                     @include('layouts.navbars.auth.sidebar')
                 @endif
                 <!-- /Sidebar -->
-                {{-- @include('layouts.navbars.auth.nav-profile') --}}
                 <div class="page-wrapper {{ Route::currentRouteName() == 'pos' ? 'ms-0' : '' }}"
                     style="{{ Route::currentRouteName() == 'pos' ? 'min-height: 731px;' : '' }}">
                     <div class="content">
@@ -181,7 +180,6 @@
                 </div>
             </div>
             <!-- /Main Wrapper -->
-            {{-- @include('components.plugins.fixed-plugin') --}}
         @endif
     @endauth
 
