@@ -99,7 +99,7 @@
             </div>
             <!-- /Filter -->
             <div class="table-responsive">
-                <table class="table datanew">
+                <table class="table {{ $produits->isEmpty() ? '' : 'datanew' }}">
                     <thead>
                         <tr>
                             <th>
@@ -504,6 +504,7 @@
         </div>
     </div>
 </div>
+
 @push('scripts')
-    <script src="{{ asset('assets/plugins/owlcarousel/owl.carousel.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 @endpush
