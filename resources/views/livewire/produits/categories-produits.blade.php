@@ -1,18 +1,12 @@
 <div>
     {{-- Care about people's approval and you will be their prisoner. --}}
     <div class="content">
-        <div class="page-header">
-            <div class="page-title">
-                <h4>Catégories de Produits</h4>
-                <h6>Gestion</h6>
-            </div>
-            <div class="page-btn">
-                <a  class="btn btn-added" data-bs-toggle="modal" data-bs-target="#AddCategorie">
-                    <img src="assets/img/icons/plus.svg" class="me-1" alt="img"> Categorie
-                </a>
-            </div>
-        </div>
 
+        <x-slot name="header">
+            <h4>
+                {{ __('Gestion des catégories') }}
+            </h4>
+        </x-slot>
 
         <!-- /product list -->
         <div class="card">
@@ -104,39 +98,53 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-6 col-sm-12 col-12">
-                            <div class="form-group">
-                                <label>Nom </label>
-                                <input wire:model="nomCategorie" type="text" id="code">
-                                @error('nomCategorie') <span class="error">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-12 col-12">
-                            <div class="form-group">
-                                <label>Code Categorie</label>
-                                <input wire:model="code" type="text" id="code">
-                                @error('code') <span class="error">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label>Image</label>
-                                <div class="image-upload image-upload-new">
-                                    <input wire:model="image" type="file" accept="image/*" id="image">
-                                    <div class="image-uploads">
-                                        <img src="{{ asset('assets/img/icons/upload.svg')}}" alt="img">
-                                        <h4>Drag and drop a file to upload</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <label>Nom </label>
+                                        <input wire:model="nomCategorie" type="text" id="code">
+                                        @error('nomCategorie') <span class="error">{{ $message }}</span> @enderror
                                     </div>
-                                    @error('image') <span class="error">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="col-lg-6 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <label>Code Categorie</label>
+                                        <input wire:model="code" type="text" id="code">
+                                        @error('code') <span class="error">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <label>Image</label>
+                                        <div class="image-upload image-upload-new">
+                                            <input wire:model="image" type="file" accept="image/*" id="image">
+                                            <div class="image-uploads">
+                                                @if ($image)
+                                                    <img src="{{ $image->temporaryUrl() }}" width="80"
+                                                        height="80" alt="img">
+                                                @else
+                                                    <img src="{{ asset('assets/img/icons/upload.svg') }}"
+                                                        alt="img">
+                                                    <h4>Drag and drop a file to upload</h4>
+                                                @endif
+                                               
+                                            </div>
+                                            @error('image') <span class="error">{{ $message }}</span> @enderror
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="card-footer">
+                            <div class="col-lg-12">
+                                <a wire:click="createCategorie" class="btn btn-submit me-2">Submit</a>
+                                <a class="btn btn-cancel" data-bs-dismiss="modal">Cancel</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-lg-12">
-                        <a wire:click="createCategorie" class="btn btn-submit me-2">Submit</a>
-                        <a class="btn btn-cancel" data-bs-dismiss="modal">Cancel</a>
-                    </div>
+
                 </div>
             </div>
         </div>
