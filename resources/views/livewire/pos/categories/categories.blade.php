@@ -1,5 +1,5 @@
 <div>
-    <ul class="tabs owl-carousel owl-theme owl-product border-0">
+    <ul class="tabs owl-carousel owl-theme owl-product border-0" wire:ignore>
         @foreach ($categories as $category)
             <li wire:key="{{ $category->id }}" wire:click="setActiveTab('{{ $category->id }}')"
                 class="{{ $activeCategoryId == $category->id ? 'active' : '' }}">

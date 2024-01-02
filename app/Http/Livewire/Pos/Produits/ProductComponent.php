@@ -22,6 +22,11 @@ class ProductComponent extends Component
     {
         $this->products = Produit::where('categorie_id', $this->activeCategoryId)->get();
     }
+
+    public function mount()
+    {
+        $this->products = Produit::where('categorie_id', $this->activeCategoryId)->get();
+    }
     public function render()
     {
         return view('livewire.pos.produits.product-component');
