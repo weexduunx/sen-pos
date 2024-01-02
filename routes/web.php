@@ -19,6 +19,8 @@ use App\Http\Livewire\Users\UserManagement;
 use App\Http\Livewire\Pos\PosComponent;
 use App\Http\Livewire\Produits\CreateProduits;
 use App\Http\Livewire\Produits\ListeProduits;
+use App\Http\Livewire\Produits\CategoriesProduits;
+use App\Http\Livewire\Produits\Units;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -60,5 +62,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/pos', PosComponent::class)->name('pos');
     Route::get('/users',UserManagement::class)->name('users');
     Route::get('/listeProduits', ListeProduits::class)->name('listeProduits');
+    Route::get('/categories', CategoriesProduits::class)->name('categories');
+    Route::get('/units', Units::class)->name('units');
     // Route::get('/listeProduits/{id}', [ListeProduits::class, 'details'])->name('produits.details');
 });

@@ -70,7 +70,7 @@ class PosComponent extends Component
                                 ->where('etat', 1)
                                 ->exists();
         $caisse = Caisses::where('user_id', Auth::user()->id)
-                                ->where('etat', 1)->first();
+                    ->where('etat', 1)->first();
         return view('livewire.pos.pos-component',['caisse' => $caisse]);
     }
 }

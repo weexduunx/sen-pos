@@ -121,6 +121,140 @@
         });
 
     </script>
+    <script>
+        document.addEventListener('livewire:load', () => {
+            Livewire.on('closeModal', () => {
+                // Add code here to close your modal
+                $('#AddCategorie').modal('hide');
+            });
+        });
+    </script>
+     <script>
+        var SwalModal = (icon, title, html) => {
+            Swal.fire({
+                icon,
+                title,
+                html
+            })
+        }
+
+        var SwalAvert = (title, text, icon, button) => {
+            Swal.fire({
+                title,
+                text,
+                icon,
+                button,
+            });
+        }
+
+        var SwalConfirm = (icon, title, html, confirmButtonText, method, params, callback) => {
+            Swal.fire({
+                icon,
+                title,
+                html,
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    return livewire.emit(method, params),
+                        Swal.fire(
+                            'Supprimé!',
+                            'La ligne a été supprimé.',
+                            'success'
+                        )
+                }
+
+                if (callback) {
+                    return livewire.emit(callback)
+                }
+            })
+        }
+
+        var SwalConfirmAr = (icon, title, html, confirmButtonText, method, params, callback) => {
+            Swal.fire({
+                icon,
+                title,
+                html,
+                showCancelButton: true,
+                confirmButtonColor: '#47C363',
+                cancelButtonColor: '#FC544B',
+                confirmButtonText,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    return livewire.emit(method, params),
+                        Swal.fire(
+                            'Archivé!',
+                            'Le bon a été archivé.',
+                            'success'
+                        )
+                }
+
+                if (callback) {
+                    return livewire.emit(callback)
+                }
+            })
+        }
+
+        var SwalAlert = (icon, title, timeout = 7000) => {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: timeout,
+                onOpen: toast => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon,
+                title
+            })
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            this.livewire.on('swal:modal', data => {
+                SwalModal(data.icon, data.title, data.text)
+            })
+
+            this.livewire.on('swal:confirm', data => {
+                SwalConfirm(data.icon, data.title, data.text, data.confirmText, data.method, data.params,
+                    data.callback)
+            })
+
+            this.livewire.on('swal:confirmar', data => {
+                SwalConfirmAr(data.icon, data.title, data.text, data.confirmText, data.method, data.params,
+                    data.callback)
+            })
+
+            this.livewire.on('swal:alert', data => {
+                SwalAlert(data.icon, data.title, data.timeout)
+            })
+
+            this.livewire.on('swal:avert', data => {
+                SwalAvert(data.title, data.text, data.icon, data.button)
+            })
+        })
+
+        document.addEventListener('DOMContentLoaded', () => {
+            this.livewire.on('urlChange', (url) => {
+                history.pushState(null, null, url);
+            });
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            this.livewire.on('closeModal', (name) => {
+                $('#' + name).modal('hide')
+            });
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            this.livewire.on('openModal', (name) => {
+                $('#' + name).modal('show')
+            });
+        });
+    </script>
+    
     
     @livewireScripts
 </body>

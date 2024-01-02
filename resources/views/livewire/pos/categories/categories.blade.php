@@ -1,65 +1,13 @@
 <div>
     {{-- Do your work, then step back. --}}
-        <ul class=" tabs owl-carousel owl-theme owl-product  border-0 ">
-            <li class="active" id="fruits">
-                <div class="product-details ">
-                    <img src="{{ asset('assets/img/product/product62.png') }}" alt="img">
-                    <h6>Fruits</h6>
-                </div>
-            </li>
-            <li id="headphone">
-                <div class="product-details ">
-                    <img src="{{ asset('assets/img/product/product63.png') }}" alt="img">
-                    <h6>Headphones</h6>
-                </div>
-            </li>
-            <li id="Accessories">
+    <ul class=" tabs owl-carousel owl-theme owl-product  border-0 ">
+        @foreach ($categories as $category)
+            <li wire:key="{{ $category->id }}" id="{{ Str::slug($category->nomCategorie) }}">
                 <div class="product-details">
-                    <img src="{{ asset('assets/img/product/product64.png') }}" alt="img">
-                    <h6>Accessories</h6>
+                    <img src="{{ asset('storage/' . $category->image) }}" alt="img">
+                    <h6>{{ $category->nomCategorie }}</h6>
                 </div>
             </li>
-            <li id="Shoes">
-                <a class="product-details">
-                    <img src="{{ asset('assets/img/product/product65.png') }}" alt="img">
-                    <h6>Shoes</h6>
-                </a>
-            </li>
-            <li id="computer">
-                <a class="product-details">
-                    <img src="{{ asset('assets/img/product/product66.png') }}" alt="img">
-                    <h6>Computer</h6>
-                </a>
-            </li>
-            <li id="Snacks">
-                <a class="product-details">
-                    <img src="{{ asset('assets/img/product/product67.png') }}" alt="img">
-                    <h6>Snacks</h6>
-                </a>
-            </li>
-            <li id="watch">
-                <a class="product-details">
-                    <img src="{{ asset('assets/img/product/product68.png') }}" alt="img">
-                    <h6>Watches</h6>
-                </a>
-            </li>
-            <li id="cycle">
-                <a class="product-details">
-                    <img src="{{ asset('assets/img/product/product61.png') }}" alt="img">
-                    <h6>Cycles</h6>
-                </a>
-            </li>
-            <li id="fruits1">
-                <div class="product-details ">
-                    <img src="{{ asset('assets/img/product/product62.png') }}" alt="img">
-                    <h6>Fruits</h6>
-                </div>
-            </li>
-            <li id="headphone1">
-                <div class="product-details ">
-                    <img src="{{ asset('assets/img/product/product63.png') }}" alt="img">
-                    <h6>Headphones</h6>
-                </div>
-            </li>
-        </ul>
+        @endforeach
+    </ul>
 </div>

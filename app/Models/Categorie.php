@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Categorie extends Model
 {
     use HasFactory;
+    protected $guarded = [];
     public function sousCategories(): HasMany
     {
         return $this->hasMany(sousCategories::class);
