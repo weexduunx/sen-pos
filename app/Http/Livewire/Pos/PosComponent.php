@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 class PosComponent extends Component
 {
     public $montantOuverture,$montantFermeture,$hasCaisse;
-    public $activeTab = 'huiles';
     protected $rules = [
         'montantOuverture' => 'required|numeric|min:0',
     ];

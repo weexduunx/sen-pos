@@ -65,7 +65,8 @@
                 {{-- Liviwirere  Categories--}}
                 @livewire('pos.categories.categories')
                 {{-- Liviwirere  Produits--}}
-                @livewire('pos.produits.product-component')
+                <livewire:pos.produits.product-component  />
+                {{-- @livewire('pos.produits.product-component') --}}
             </div>
             {{-- Liviwirere  Order--}}
             @livewire('pos.ventes.order')

@@ -10,9 +10,10 @@ class ProductComponent extends Component
     public $products;
     public $activeCategoryId;
 
-    protected $listeners = ['setActiveTab'];
+    protected $listeners = ['categorySelected' => 'setActiveCategory'];
 
-    public function setActiveTab($categoryId)
+
+    public function setActiveCategory($categoryId)
     {
         $this->activeCategoryId = $categoryId;
         $this->loadProducts();
@@ -23,7 +24,9 @@ class ProductComponent extends Component
         $this->products = Produit::where('categorie_id', $this->activeCategoryId)->get();
     }
     public function render()
-    {
-        return view('livewire.pos.produits.product-component');
+    {  
+        return view('livewire.pos.produits.product-component',[
+            'products' => $this->products,
+        ]);
     }
 }
