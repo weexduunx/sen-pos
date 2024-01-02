@@ -166,7 +166,7 @@
                                 @if (Route::currentRouteName() == 'listeProduits')
                                     <div class="page-btn">
                                         <button type="button" class="btn btn-added" data-bs-toggle="modal"
-                                            data-bs-target="#createModal">
+                                            data-bs-target="#createAndUpdateModal">
                                             <img src="{{ asset('assets/img/icons/plus.svg') }}" alt="img"
                                                 class="me-1">Add New Product
                                         </button>

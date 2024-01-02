@@ -102,7 +102,7 @@
     <script>
         document.addEventListener('livewire:load', () => {
             Livewire.on('fermerModal', (event) => {
-                $('#createModal').modal('hide');
+                $('#createAndUpdateModal').modal('hide');
             });
         });
         document.addEventListener('livewire:load', () => {
@@ -112,22 +112,47 @@
 
         });
         document.addEventListener('livewire:load', () => {
+            Livewire.on('fermerModal', (event) => {
+                $('#editModal').modal('hide');
+            });
+        });
+        document.addEventListener('livewire:load', () => {
             Livewire.on('openEditModal', (event) => {
-                $('#editModal').modal('show');
+                $('#createAndUpdateModal').modal('show');
             });
 
         });
-        document.addEventListener('livewire:load', function () {
-            Livewire.on('initOwlCarousel', function () {
+        document.addEventListener('livewire:load', function() {
+            Livewire.on('initOwlCarousel', function() {
                 // Initialisation du carrousel Owl Carousel
                 $('.owl-carousel').owlCarousel({
                     // Options de configuration du carrousel
                 });
             });
         });
-
+        window.addEventListener('alert', event => {
+            toastr[event.detail.type](event.detail.message,
+                event.detail.title ?? ''), 
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+        });
     </script>
-    
+
     @livewireScripts
 </body>
 
