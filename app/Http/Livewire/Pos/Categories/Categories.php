@@ -7,9 +7,22 @@ use App\Models\Categorie;
 
 class Categories extends Component
 {
+    public $categories;
+    public $activeCategoryId;
+
+    public function mount()
+    {
+        $this->categories = Categorie::all();
+        $this->activeCategoryId = $this->categories->first()->id; // Fixer la premiere catégorie
+    }
+    
+    public function setActiveTab($categoryId)
+    {
+        $this->activeCategoryId = $categoryId;
+    }
+    
     public function render()
     {
-        $categories = Categorie::all();
-        return view('livewire.pos.categories.categories',['categories' => $categories]);
+        return view('livewire.pos.categories.categories');
     }
 }

@@ -1,8 +1,8 @@
 <div>
-    {{-- Do your work, then step back. --}}
-    <ul class=" tabs owl-carousel owl-theme owl-product  border-0 ">
+    <ul class="tabs owl-carousel owl-theme owl-product border-0">
         @foreach ($categories as $category)
-            <li wire:key="{{ $category->id }}" id="{{ Str::slug($category->nomCategorie) }}">
+            <li wire:key="{{ $category->id }}" wire:click="setActiveTab('{{ $category->id }}')"
+                class="{{ $activeCategoryId == $category->id ? 'active' : '' }}">
                 <div class="product-details">
                     <img src="{{ asset('storage/' . $category->image) }}" alt="img">
                     <h6>{{ $category->nomCategorie }}</h6>

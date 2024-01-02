@@ -3,7 +3,7 @@
         <h4>
             {{ __('Gestion des produits') }}
         </h4>
-      </x-slot>
+    </x-slot>
     <!-- /product list -->
     <div class="card">
         <div class="card-body">
@@ -99,7 +99,7 @@
             </div>
             <!-- /Filter -->
             <div class="table-responsive">
-                {{-- <table class="table datanew">
+                <table class="table datanew">
                     <thead>
                         <tr>
                             <th>
@@ -142,64 +142,78 @@
                                 <td>{{ $produit->quatite }}</td>
                                 <td>{{ $produit->created_at->format('d/m/Y H:i:s') }}</td>
                                 <td>
-                                    <a href="javascript:void(0);" class="btn" wire:click='details({{ $produit->id }})'>
+                                    <a href="javascript:void(0);" class="btn"
+                                        wire:click='details({{ $produit->id }})'>
                                         <img src="{{ asset('assets/img/icons/eye.svg') }}" alt="img">
                                     </a>
 
-                                    <a href="javascript:void(0);" class="btn" data-bs-toggle="modal" data-bs-target="#detailModal">
+                                    <a href="javascript:void(0);" class="btn" data-bs-toggle="modal"
+                                        wire:click='edit({{ $produit->id }})'>
                                         <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
                                     </a>
-                                    <a href="javascript:void(0);" class="btn" data-bs-toggle="modal" data-bs-target="#detailModal">
+                                    <a href="javascript:void(0);" class="btn" wire:click='delete({{ $produit->id }})'>
                                         <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
                                     </a>
                                 </td>
                             </tr>
-                            @empty
+                        @empty
                             <tr>
                                 <td colspan="10">Aucun produit trouvé.</td>
                             </tr>
                         @endforelse
                     </tbody>
-                </table> --}}
+                </table>
             </div>
         </div>
     </div>
     <!-- /product list -->
 
-    <!-- Modal Create -->
-    <div wire:ignore class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <!-- Modal CreateAndUpdate -->
+    <div wire:ignore.self class="modal fade" id="createAndUpdateModal" tabindex="-1"
+        aria-labelledby="createAndUpdateModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     {{-- <h5 class="modal-title" id="exampleModalLabel">Product Add</h5> --}}
                     <div class="page-header modal-title mb-0">
                         <div class="page-title">
-                            <h4>Product Add</h4>
-                            <h6>Create new product</h6>
+                            @if ($mode === 'create')
+                                <h4>Product Add</h4>
+                                <h6>Create new product</h6>
+                            @else
+                                <h4>Product Edit</h4>
+                                <h6>Edit product details</h6>
+                            @endif
                         </div>
                     </div>
-                    <button type="button" class="btn-close btn-secondary" data-bs-dismiss="modal"
+                    <button type="button" class="btn-close btn-secondary" wire:click="fermer"
                         aria-label="Close">x</button>
                 </div>
                 <div class="modal-body">
                     <!-- /add -->
                     <div class="card">
                         <div class="card-body">
-                            <form wire:submit.prevent="create">
+                            <form wire:submit.prevent="{{ $mode === 'create' ? 'create' : 'update' }}">
                                 <div class="row">
+                                    @if ($mode === 'edit')
+                                        <input type="hidden" wire:model="idProduit">
+                                    @endif
                                     <div class="col-lg-4 col-sm-6 col-12">
                                         <div class="form-group">
                                             <label>Nom Produit</label>
                                             <input type="text" wire:model='nomProduit'>
-                                            @error('nomProduit') <span class="error">{{ $message }}</span> @enderror
+                                            @error('nomProduit')
+                                                <span class="error">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-sm-6 col-12">
                                         <div class="form-group">
                                             <label>Prix d'Achat</label>
                                             <input type="text" wire:model='prixAchat'>
-                                            @error('prixAchat') <span class="error">{{ $message }}</span> @enderror
+                                            @error('prixAchat')
+                                                <span class="error">{{ $message }}</span>
+                                            @enderror
 
                                         </div>
                                     </div>
@@ -207,8 +221,9 @@
                                         <div class="form-group">
                                             <label>Prix de Vente</label>
                                             <input type="text" wire:model='prixVente'>
-                                            @error('prixVente') <span class="error">{{ $message }}</span> @enderror
-
+                                            @error('prixVente')
+                                                <span class="error">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-sm-6 col-12">
@@ -255,7 +270,9 @@
                                                 <option>Choose Brand</option>
                                                 <option value="sympa">Sympa</option>
                                             </select>
-                                            @error('marqueProduit') <span class="error">{{ $message }}</span> @enderror
+                                            @error('marqueProduit')
+                                                <span class="error">{{ $message }}</span>
+                                            @enderror
 
                                         </div>
                                     </div>
@@ -263,7 +280,9 @@
                                         <div class="form-group">
                                             <label>Code Bar</label>
                                             <input type="text" wire:model='codeBar'>
-                                            @error('codeBar') <span class="error">{{ $message }}</span> @enderror
+                                            @error('codeBar')
+                                                <span class="error">{{ $message }}</span>
+                                            @enderror
 
                                         </div>
                                     </div>
@@ -277,7 +296,9 @@
                                                 <option value="50 kg"> 50 kg</option>
                                                 <option value="25 kg"> 25 kg</option>
                                             </select>
-                                            @error('unit_id') <span class="error">{{ $message }}</span> @enderror
+                                            @error('unit_id')
+                                                <span class="error">{{ $message }}</span>
+                                            @enderror
 
                                         </div>
                                     </div>
@@ -285,7 +306,9 @@
                                         <div class="form-group">
                                             <label>Seuil</label>
                                             <input type="text" wire:model='alertStock'>
-                                            @error('alertStock') <span class="error">{{ $message }}</span> @enderror
+                                            @error('alertStock')
+                                                <span class="error">{{ $message }}</span>
+                                            @enderror
 
                                         </div>
                                     </div>
@@ -294,7 +317,9 @@
                                         <div class="form-group">
                                             <label>Quantité</label>
                                             <input type="text" wire:model='quatite'>
-                                            @error('quatite') <span class="error">{{ $message }}</span> @enderror
+                                            @error('quatite')
+                                                <span class="error">{{ $message }}</span>
+                                            @enderror
 
                                         </div>
                                     </div>
@@ -305,7 +330,9 @@
                                                 <option value="0">Closed</option>
                                                 <option value="1">Open</option>
                                             </select>
-                                            @error('status') <span class="error">{{ $message }}</span> @enderror
+                                            @error('status')
+                                                <span class="error">{{ $message }}</span>
+                                            @enderror
 
                                         </div>
                                     </div>
@@ -313,41 +340,59 @@
                                         <div class="form-group">
                                             <label>Description</label>
                                             <textarea class="form-control" wire:model='description'></textarea>
-                                            @error('description') <span class="error">{{ $message }}</span> @enderror
+                                            @error('description')
+                                                <span class="error">{{ $message }}</span>
+                                            @enderror
 
                                         </div>
                                     </div>
-
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label> Product Image</label>
                                             <div class="image-upload">
                                                 <input type="file" wire:model="image">
                                                 <div class="image-uploads">
-                                                    @if ($image)
-                                                        <img src="{{ $image->temporaryUrl() }}" width="80"
-                                                            height="80" alt="img">
+                                                    @if ($mode === 'create')
+                                                        @if ($image)
+                                                            <img src="{{ $image->temporaryUrl() }}" width="80"
+                                                                height="80" alt="img">
+                                                        @else
+                                                            <img src="{{ asset('assets/img/icons/upload.svg') }}"
+                                                                alt="img">
+                                                            <h4>Drag and drop a file to upload</h4>
+                                                        @endif
                                                     @else
-                                                        <img src="{{ asset('assets/img/icons/upload.svg') }}"
-                                                            alt="img">
-                                                        <h4>Drag and drop a file to upload</h4>
+                                                        @if ($image)
+                                                            <img src="{{ $image->temporaryUrl() }}" width="80"
+                                                                height="80" alt="img">
+                                                        @elseif ($imageDetail)
+                                                            <img src="{{ asset('/storage/' . $imageDetail) }}"
+                                                                width="80" height="80" alt="img">
+                                                        @else
+                                                            <img src="{{ asset('assets/img/icons/upload.svg') }}"
+                                                                alt="img">
+                                                            <h4>Drag and drop a file to upload</h4>
+                                                        @endif
                                                     @endif
                                                 </div>
-                                            @error('image') <span class="error">{{ $message }}</span> @enderror
-
+                                                @error('image')
+                                                    <span class="error">{{ $message }}</span>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <button class="btn btn-submit me-2" type="submit"
-                                            wire:loading.attr="disabled" wire:target="create">Submit
+                                            wire:loading.attr="disabled"
+                                            wire:target="{{ $mode === 'create' ? 'create' : 'update' }}">
+                                            {{ $mode === 'create' ? 'Create' : 'Update' }}
                                             <div wire:loading>
                                                 <div class="spinner-border" role="status">
                                                     <span class="sr-only">Loading...</span>
                                                 </div>
                                             </div>
                                         </button>
-                                        <button class="btn btn-cancel" wire:click="fermer">Cancel</button>
+                                        <button class="btn btn-cancel" type="button" wire:click="fermer">Cancel</button>
                                     </div>
                                 </div>
                             </form>
@@ -358,9 +403,11 @@
             </div>
         </div>
     </div>
-    <!-- /Modal Create-->
+    <!-- /Modal CreateAndUpdate-->
+
     <!-- Modal Détails produits -->
-    <div wire:model="produitDetails" class="modal modal1 fade" id="detailModal"  tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+    <div wire:model="produitDetails" class="modal modal1 fade" id="detailModal" tabindex="-1"
+        aria-labelledby="detailModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -370,8 +417,7 @@
                             <h6>Full details of a product</h6>
                         </div>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close">x</button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">x</button>
                 </div>
                 <div class="modal-body">
                     <!-- /add -->
@@ -382,8 +428,7 @@
                                     <div class="bar-code-view">
                                         <img src="{{ asset('assets/img/barcode1.png') }}" alt="barcode">
                                         <a class="printimg">
-                                            <img src="{{ asset('assets/img/icons/printer.svg') }}"
-                                                alt="print">
+                                            <img src="{{ asset('assets/img/icons/printer.svg') }}" alt="print">
                                         </a>
                                     </div>
                                     <div class="productdetails">
@@ -423,10 +468,10 @@
                                             <li>
                                                 <h4>Description</h4>
                                                 <h6>{{ $description }}</h6>
-                                            </li>  
-                                           
+                                            </li>
+
                                         </ul>
-                                
+
                                     </div>
                                 </div>
                             </div>
@@ -434,16 +479,12 @@
                         <div class="col-lg-4 col-sm-12">
                             <div class="card">
                                 <div class="card-body ">
-                                    {{-- <img src="{{ asset('storage/' . $detailImage) }}"
-                                                alt="img">
-                                                <h4>{{ $nomProduit }}</h4>
-                                                <h6>581kb</h6> --}}
                                     <div class="slider-product-details">
-                                        <div wire:ignore.self  class="owl-carousel owl-theme product-slide" wire:after="initOwlCarousel">
+                                        <div wire:ignore.self class="owl-carousel owl-theme product-slide"
+                                            wire:after="initOwlCarousel">
                                             <div class="slider-product">
-                                                
-                                                <img src="{{ asset('storage/' . $detailImage) }}"
-                                                alt="img">
+
+                                                <img src="{{ asset('storage/' . $detailImage) }}" alt="img">
                                                 <h4>{{ $nomProduit }}</h4>
                                                 <h6>{{ $unit_id }}</h6>
                                             </div>
@@ -466,5 +507,3 @@
 @push('scripts')
     <script src="{{ asset('assets/plugins/owlcarousel/owl.carousel.min.js') }}"></script>
 @endpush
-
-
