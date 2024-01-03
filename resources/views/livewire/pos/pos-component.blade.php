@@ -1,78 +1,86 @@
 <div>
-    <div class="content">
-        <div class="row">
-            <div class="col-lg-8 col-sm-12 tabs_wrapper">
-                {{-- <div class="page-header ">
-                    <div class="page-title">
-                        <h4>Categories</h4>
-                        <h6>Manage your purchases</h6>
-                    </div>
+    <div class="col-md-3 col-sm-12">
+        @if ($hasCaisse)
+            <a href="javascript:void(0);" class="btn btn-warning btn-adds" data-bs-toggle="modal"
+                data-bs-target="#CloseCaisse">
+                <i class="fa fa-times-circle me-2"></i> <!-- Icône de fermeture -->
+                Fermer Caisse
+            </a>
 
-                </div> --}}
-
-                <div class="row">
-                    <div class="col-md-3 col-sm-12">
-                        @if ($hasCaisse)
-                            <a href="javascript:void(0);" class="btn btn-warning btn-adds" data-bs-toggle="modal" data-bs-target="#CloseCaisse">
-                                <i class="fa fa-times-circle me-2"></i> <!-- Icône de fermeture -->
-                                Fermer Caisse
-                            </a>
-            
-                            {{-- <a href="javascript:void(0);" class="btn btn-adds" data-bs-toggle="modal"
-                            data-bs-target="#CloseCaisse"><i class="fa fa-plus-circle me-2"></i>
-                            Fermer Caisse</a> --}}
-                        @else
-                        <!-- Display "Ouvrir Caisse" button if hasCaisse is false -->
-                            <a href="javascript:void(0);" class="btn btn-adds" data-bs-toggle="modal"
-                            data-bs-target="#OpenCaisse"><i class="fa fa-plus-circle me-2"></i>
-                            Ouvrir caisse</a>
-                        @endif
-                    </div>
-                    <div class="col-md-3 col-sm-12">
-                        <div class="dash-widget dash2">
-                            <div class="dash-widgetimg">
-                                <span><img src="{{ asset('assets/img/icons/dash3.svg') }}" alt="img"></span>
-                            </div>
-                            <div class="dash-widgetcontent">
-                                <h5>50</h5>
-                                <h6>Ventes</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-12">
-                        <div class="dash-widget dash2">
-                            <div class="dash-widgetimg">
-                                <span><img src="{{ asset('assets/img/icons/dash2.svg') }}" alt="img"></span>
-                            </div>
-                            <div class="dash-widgetcontent">
-                                <h5>40000</h5>
-                                <h6></h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-12">
-                        <div class="dash-widget dash2">
-                            <div class="dash-widgetimg">
-                                <span><img src="{{ asset('assets/img/icons/dash1.svg') }}" alt="img"></span>
-                            </div>
-                            <div class="dash-widgetcontent">
-                                <h5>40000</h5>
-                                <h6>Montant Ventes</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {{-- Liviwirere  Categories--}}
-                @livewire('pos.categories.categories')
-                {{-- Liviwirere  Produits--}}
-                <livewire:pos.produits.product-component  />
-                {{-- @livewire('pos.produits.product-component') --}}
-            </div>
-            {{-- Liviwirere  Order--}}
-            @livewire('pos.ventes.order')
-        </div>
+            {{-- <a href="javascript:void(0);" class="btn btn-adds" data-bs-toggle="modal"
+            data-bs-target="#CloseCaisse"><i class="fa fa-plus-circle me-2"></i>
+            Fermer Caisse</a> --}}
+        @else
+            <!-- Display "Ouvrir Caisse" button if hasCaisse is false -->
+            <a href="javascript:void(0);" class="btn btn-adds" data-bs-toggle="modal" data-bs-target="#OpenCaisse"><i
+                    class="fa fa-plus-circle me-2"></i>
+                Ouvrir caisse</a>
+        @endif
     </div>
-       <!-- Modal Calculator-->
+    <div class="content">
+        @if (!$hasCaisse)
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Attention !!</strong>Vous devez ouvrir la caissse pour effectuer des transcaction de vente
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        @if ($hasCaisse)
+            <div class="row">
+                <div class="col-lg-8 col-sm-12 tabs_wrapper">
+                    {{-- <div class="row">
+                        <div class="col-md-3 col-sm-12">
+                            <div class="dash-widget dash2">
+                                <div class="dash-widgetimg">
+                                    <span><img src="{{ asset('assets/img/icons/dash3.svg') }}" alt="img"></span>
+                                </div>
+                                <div class="dash-widgetcontent">
+                                    <h5>50</h5>
+                                    <h6>Ventes</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-12">
+                            <div class="dash-widget dash2">
+                                <div class="dash-widgetimg">
+                                    <span><img src="{{ asset('assets/img/icons/dash2.svg') }}" alt="img"></span>
+                                </div>
+                                <div class="dash-widgetcontent">
+                                    <h5>40000</h5>
+                                    <h6></h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-12">
+                            <div class="dash-widget dash2">
+                                <div class="dash-widgetimg">
+                                    <span><img src="{{ asset('assets/img/icons/dash1.svg') }}" alt="img"></span>
+                                </div>
+                                <div class="dash-widgetcontent">
+                                    <h5>40000</h5>
+                                    <h6>Montant Ventes</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div> --}}
+                    <div class="card mb-0 border-0 shadow-sm">
+                        <div class="card-body">
+                            <livewire:pos.produits.search-product />
+                        </div>
+                    </div>
+                    {{-- Liviwirere  Categories --}}
+                    <livewire:pos.categories.categories />
+                    {{-- @livewire('pos.categories.categories') --}}
+                    {{-- Liviwirere  Produits --}}
+                    <livewire:pos.produits.product-component />
+                    {{-- @livewire('pos.produits.product-component') --}}
+
+                </div>
+                {{-- Liviwirere  Order --}}
+                <livewire:pos.ventes.order />
+            </div>
+        @endif
+    </div>
+    <!-- Modal Calculator-->
     <div class="modal fade" id="calculator" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -133,7 +141,7 @@
         </div>
     </div>
 
-    <div  wire:ignore.self class="modal fade" id="OpenCaisse" tabindex="-1" aria-labelledby="create" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="OpenCaisse" tabindex="-1" aria-labelledby="create" aria-hidden="true">
         <div class="modal-dialog modal-md modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -165,7 +173,8 @@
             </div>
         </div>
     </div>
-    <div wire:ignore.self class="modal fade" id="CloseCaisse" tabindex="-1" aria-labelledby="create" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="CloseCaisse" tabindex="-1" aria-labelledby="create"
+        aria-hidden="true">
         <div class="modal-dialog modal-md modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -973,8 +982,8 @@
                                 <div class="table-top">
                                     <div class="search-set">
                                         <div class="search-input">
-                                            <a class="btn btn-searchset"><img
-                                                    src="assets/img/icons/search-white.svg" alt="img"></a>
+                                            <a class="btn btn-searchset"><img src="assets/img/icons/search-white.svg"
+                                                    alt="img"></a>
                                             <div id="DataTables_Table_0_filter" class="dataTables_filter"><label>
                                                     <input type="search" class="form-control form-control-sm"
                                                         placeholder="Search..."

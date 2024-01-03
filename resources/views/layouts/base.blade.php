@@ -71,6 +71,8 @@
     </div>
     {{ $slot }}
 
+    @stack('scripts')
+
     <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
     <!-- Feather Icon JS -->
     <script src="{{ asset('assets/js/feather.min.js') }}"></script>
@@ -285,6 +287,7 @@
             });
         });
     </script>
+    
     
     
     @livewireScripts

@@ -26,7 +26,7 @@ class PosComponent extends Component
 
         $this->reset(['montantOuverture']);
         
-        // return redirect()->route('pos');
+        return redirect()->route('pos');
     }
     public function fermerCaisse()
     {
