@@ -1,8 +1,7 @@
 <div>
     <x-slot name="header">
-        <h4>
-            {{ __('Gestion des produits') }}
-        </h4>
+        <h4>{{ __('Gestion des produits') }}</h4>
+        <h6>{{ __('Liste des produits') }}</h6>
     </x-slot>
     <!-- /product list -->
     <div class="card">
@@ -99,7 +98,7 @@
             </div>
             <!-- /Filter -->
             <div class="table-responsive">
-                <table class="table {{ $produits->isEmpty() ? '' : 'datanew' }}">
+                <table class="table ">
                     <thead>
                         <tr>
                             <th>
@@ -386,11 +385,13 @@
                                             wire:loading.attr="disabled"
                                             wire:target="{{ $mode === 'create' ? 'create' : 'update' }}">
                                             {{ $mode === 'create' ? 'Create' : 'Update' }}
-                                            <div wire:loading>
+                                            <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                            {{-- <div wire:loading>
                                                 <div class="spinner-border" role="status">
                                                     <span class="sr-only">Loading...</span>
                                                 </div>
-                                            </div>
+                                            </div> --}}
+                                            Loading...
                                         </button>
                                         <button class="btn btn-cancel" type="button" wire:click="fermer">Cancel</button>
                                     </div>

@@ -154,8 +154,12 @@
             <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
                 <span class="user-info">
                     <span class="user-letter">
-                        {{-- <img src="{{ asset('storage/' . auth()->user()->image) }}" alt="" class="img-fluid"> --}}
-                        <img alt="" src="{{ asset('assets/img/profiles/avatar-13.jpg') }}" class="img-fluid">
+                        @if (auth()->user()->image == null)
+                            <img src="{{ asset('assets/img/profiles/avatar-placeholder.png') }}" alt="" class="img-fluid">
+                        @else
+                        <img src="{{ asset('storage/' . auth()->user()->image) }}" alt="" class="img-fluid">
+                        @endif
+                        {{-- <img alt="" src="{{ asset('assets/img/profiles/avatar-13.jpg') }}" class="img-fluid"> --}}
                     </span>
                     <span class="user-detail">
                         <span class="user-name">{{ auth()->user()->name }}</span>
@@ -168,8 +172,11 @@
                 <div class="profilename">
                     <div class="profileset">
                         <span class="user-img">
-                            {{-- <img src="{{ asset('storage/' . auth()->user()->image) }}" alt=""> --}}
-                        <img alt="" src="{{ asset('assets/img/profiles/avatar-13.jpg') }}" >
+                            @if (auth()->user()->image == null)
+                            <img src="{{ asset('assets/img/profiles/avatar-placeholder.png') }}" alt="" class="img-fluid">
+                        @else
+                        <img src="{{ asset('storage/' . auth()->user()->image) }}" alt="" class="img-fluid">
+                        @endif
 
                             <span class="status online"></span></span>
                         <div class="profilesets">
