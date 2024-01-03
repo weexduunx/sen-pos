@@ -39,5 +39,16 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        // 'image' => 'string',
+    ];
+
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'image', // Ajout de cette ligne
+        'phone',
+        'about',
+        'location',
     ];
 }

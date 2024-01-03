@@ -386,11 +386,13 @@
                                             wire:loading.attr="disabled"
                                             wire:target="{{ $mode === 'create' ? 'create' : 'update' }}">
                                             {{ $mode === 'create' ? 'Create' : 'Update' }}
-                                            <div wire:loading>
+                                            <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                            {{-- <div wire:loading>
                                                 <div class="spinner-border" role="status">
                                                     <span class="sr-only">Loading...</span>
                                                 </div>
-                                            </div>
+                                            </div> --}}
+                                            Loading...
                                         </button>
                                         <button class="btn btn-cancel" type="button" wire:click="fermer">Cancel</button>
                                     </div>
