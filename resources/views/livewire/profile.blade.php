@@ -117,9 +117,9 @@
                 <div class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-submit me-2" wire:loading.attr="disabled"
                         wire:target='update'>
-                        {{ 'Save Changes' }}
                         <span wire:loading class="spinner-border spinner-border-sm" role="status"
-                            aria-hidden="true"></span>
+                        aria-hidden="true"></span>
+                        {{ 'Save Changes' }}
                     </button>
                 </div>
             </form>
