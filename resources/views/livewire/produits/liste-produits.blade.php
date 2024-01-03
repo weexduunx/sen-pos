@@ -1,8 +1,7 @@
 <div>
     <x-slot name="header">
-        <h4>
-            {{ __('Gestion des produits') }}
-        </h4>
+        <h4>{{ __('Gestion des produits') }}</h4>
+        <h6>{{ __('Liste des produits') }}</h6>
     </x-slot>
     <!-- /product list -->
     <div class="card">
@@ -99,7 +98,7 @@
             </div>
             <!-- /Filter -->
             <div class="table-responsive">
-                <table class="table {{ $produits->isEmpty() ? '' : 'datanew' }}">
+                <table class="table ">
                     <thead>
                         <tr>
                             <th>
