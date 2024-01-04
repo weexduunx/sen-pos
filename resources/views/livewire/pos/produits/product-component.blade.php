@@ -3,8 +3,8 @@
         <div class="row">
             @if ($products && $products->count() > 0)
                 @foreach ($products as $product)
-                    <div class="col-lg-3 col-sm-6 d-flex ">
-                        <div class="productset flex-fill">
+                    <div class="col-lg-3 col-sm-6 d-flex">
+                        <div class="productset flex-fill" wire:click="addProductToCart({{ $product->id }})">
                             <div class="productsetimg">
                                 <img src="{{ asset('storage/' . $product->image) }}" alt="img">
                                 <h6>{{ $product->quatite }}</h6>
@@ -18,6 +18,21 @@
                             </div>
                         </div>
                     </div>
+                    {{-- <div class="col-lg-3 col-sm-6 d-flex ">
+                        <div class="productset flex-fill">
+                            <div class="productsetimg">
+                                <img src="{{ asset('storage/' . $product->image) }}" alt="img">
+                                <h6>{{ $product->quatite }}</h6>
+                                <div class="check-product">
+                                    <i class="fa fa-check"></i>
+                                </div>
+                            </div>
+                            <div class="productsetcontent">
+                                <h4>{{ $product->nomProduit }}</h4>
+                                <h6>{{ $product->prixVente }} FCFA</h6>
+                            </div>
+                        </div>
+                    </div> --}}
                 @endforeach
             @else
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">

@@ -289,11 +289,7 @@
         });
     </script> --}}
     
-<<<<<<< HEAD
-    @include('sweetalert::alert')
-=======
     
->>>>>>> 7f1737184f7216ace671cbd30bd30dccc6c0763a
     @livewireScripts
     @stack('scripts')
 </body>
