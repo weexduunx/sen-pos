@@ -1,22 +1,4 @@
 <div>
-    <div class="col-md-3 col-sm-12">
-        @if ($hasCaisse)
-            <a href="javascript:void(0);" class="btn btn-warning btn-adds" data-bs-toggle="modal"
-                data-bs-target="#CloseCaisse">
-                <i class="fa fa-times-circle me-2"></i> <!-- Icône de fermeture -->
-                Fermer Caisse
-            </a>
-
-            {{-- <a href="javascript:void(0);" class="btn btn-adds" data-bs-toggle="modal"
-            data-bs-target="#CloseCaisse"><i class="fa fa-plus-circle me-2"></i>
-            Fermer Caisse</a> --}}
-        @else
-            <!-- Display "Ouvrir Caisse" button if hasCaisse is false -->
-            <a href="javascript:void(0);" class="btn btn-adds" data-bs-toggle="modal" data-bs-target="#OpenCaisse"><i
-                    class="fa fa-plus-circle me-2"></i>
-                Ouvrir caisse</a>
-        @endif
-    </div>
     <div class="content">
         @if (!$hasCaisse)
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -24,6 +6,20 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
+        <div class="col-md-3 col-sm-12">
+            @if ($hasCaisse)
+                <a href="javascript:void(0);" class="btn btn-warning btn-adds" data-bs-toggle="modal"
+                    data-bs-target="#CloseCaisse">
+                    <i class="fa fa-times-circle me-2"></i> <!-- Icône de fermeture -->
+                    Fermer Caisse
+                </a>
+            @else
+                <!-- Display "Ouvrir Caisse" button if hasCaisse is false -->
+                <a href="javascript:void(0);" class="btn btn-adds" data-bs-toggle="modal" data-bs-target="#OpenCaisse"><i
+                        class="fa fa-plus-circle me-2"></i>
+                    Ouvrir caisse</a>
+            @endif
+        </div>
         @if ($hasCaisse)
             <div class="row">
                 <div class="col-lg-8 col-sm-12 tabs_wrapper">
@@ -458,7 +454,7 @@
                                     aria-selected="false" role="tab">Return</button>
                             </li>
                         </ul>
-                        <div class="tab-content">
+                        {{-- <div class="tab-content">
                             <div class="tab-pane fade show active" id="purchase" role="tabpanel"
                                 aria-labelledby="purchase-tab">
                                 <div class="table-top">
@@ -1237,7 +1233,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
