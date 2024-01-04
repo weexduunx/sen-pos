@@ -3,8 +3,8 @@
         <h4>{{ __('Gestion des catégories') }}</h4>
         <h6>{{ __('Liste des catégories') }}</h6>
     </x-slot>
-
-    <!-- /product list -->
+    @include('sweetalert::alert')
+    <!-- /Catégorie list -->
     <div class="card">
         <div class="card-body">
             <div class="table-top">
@@ -67,11 +67,11 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a class="me-3" href="editproduct.html">
-                                        <img src="assets/img/icons/edit.svg" alt="img">
+                                    <a href="javascript:void(0);" class="btn" wire:click='editCategorie({{ $category->id }})'>
+                                        <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
                                     </a>
-                                    <a class="confirm-text" href="javascript:void(0);">
-                                        <img src="assets/img/icons/delete.svg" alt="img">
+                                    <a href="javascript:void(0);" class="btn" wire:click='delete({{ $category->id }})'>
+                                        <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
                                     </a>
                                 </td>
                             </tr>
@@ -83,13 +83,23 @@
             {{ $categories->links() }}
         </div>
     </div>
-    <!-- /product list -->
+    <!-- /Catégorie list -->
     <div wire:ignore.self class="modal fade" id="AddCategorie" tabindex="-1" aria-labelledby="create"
         aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Ajout Catégories De Produit</h5>
+                    <div class="page-header modal-title mb-0">
+                        <div class="page-title">
+                            @if ($mode === 'create')
+                                <h4>Ajout</h4>
+                                <h6>Ajouter une catégorie</h6>
+                            @else
+                                <h4>Modification</h4>
+                                <h6>Modifier une catégorie</h6>
+                            @endif
+                        </div>
+                    </div>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -97,7 +107,11 @@
                 <div class="modal-body">
                     <div class="card">
                         <div class="card-body">
+                            <form wire:submit.prevent="{{ $mode === 'create' ? 'createCategorie' : 'update' }}">
                             <div class="row">
+                                @if ($mode === 'edit')
+                                    <input type="hidden" wire:model="idCategorie">
+                                @endif
                                 <div class="col-lg-6 col-sm-12 col-12">
                                     <div class="form-group">
                                         <label>Nom </label>
@@ -120,6 +134,36 @@
                                     <div class="form-group">
                                         <label>Image</label>
                                         <div class="image-upload image-upload-new">
+                                            <input type="file" wire:model="image"  accept="image/*" id="image">
+                                            <div class="image-uploads">
+                                                @if ($mode === 'create')
+                                                    @if ($image)
+                                                        <img src="{{ $image->temporaryUrl() }}" width="150"
+                                                            height="150" alt="img">
+                                                    @else
+                                                        <img src="{{ asset('assets/img/icons/upload.svg') }}"
+                                                            alt="img">
+                                                        <h4>Drag and drop a file to upload</h4>
+                                                    @endif
+                                                @else
+                                                    @if ($image)
+                                                        <img src="{{ $image->temporaryUrl() }}" width="150"
+                                                            height="150" alt="img">
+                                                    @elseif ($editedCategs->image)
+                                                        <img src="{{ asset('storage/' . $editedImage) }}"
+                                                            width="150" height="150" alt="img">
+                                                    @else
+                                                        <img src="{{ asset('assets/img/icons/upload.svg') }}"
+                                                            alt="img">
+                                                        <h4>Drag and drop a file to upload</h4>
+                                                    @endif
+                                                @endif
+                                            </div>
+                                            @error('image')
+                                                <span class="error">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                        {{-- <div class="image-upload image-upload-new">
                                             <input wire:model="image" type="file" accept="image/*" id="image">
                                             <div class="image-uploads">
                                                 @if ($image)
@@ -135,15 +179,22 @@
                                             @error('image')
                                                 <span class="error">{{ $message }}</span>
                                             @enderror
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer">
                             <div class="col-lg-12">
-                                <a wire:click="createCategorie" class="btn btn-submit me-2">Submit</a>
-                                <a class="btn btn-cancel" data-bs-dismiss="modal">Cancel</a>
+                                <button class="btn btn-submit me-2" type="submit"
+                                wire:loading.attr="disabled"
+                                wire:target="{{ $mode === 'create' ? 'createCategorie' : 'update' }}">
+                                <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                {{ $mode === 'create' ? 'Ajouter' : 'Modifier' }}
+                            </button>
+                            <button class="btn btn-cancel" type="button" wire:click="fermer">fermer</button>
+                                {{-- <a wire:click="createCategorie" class="btn btn-submit me-2">Submit</a>
+                                <a class="btn btn-cancel" data-bs-dismiss="modal">Cancel</a> --}}
                             </div>
                         </div>
                     </div>
@@ -153,3 +204,18 @@
         </div>
     </div>
 </div>
+@push('scripts')
+<script>
+    document.addEventListener('livewire:load', () => {
+        Livewire.on('closeModal', () => {
+            $('#AddCategorie').modal('hide');
+        });
+    });
+    document.addEventListener('livewire:load', () => {
+        Livewire.on('openCategEditModal', (event) => {
+            $('#AddCategorie').modal('show');
+        });
+
+    });
+</script>
+@endpush

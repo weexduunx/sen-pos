@@ -59,57 +59,12 @@ class ListeProduits extends Component
 
     ];
 
-    public function reinitialiser()
+
+    public function add()
     {
-        $this->nomProduit = '';
-        $this->description = '';
-        $this->prixAchat = '';
-        $this->prixVente = '';
-        $this->codeBar = '';
-        $this->quatite = '';
-        $this->image = '';
-        $this->alertStock = '';
-        $this->categorie_id = '';
-        $this->sousCategorie_id = '';
-        $this->unit_id = '';
-        $this->marqueProduit = '';
-        $this->status = '';
+        $this->mode = 'create';
+        $this->emit('openCreateModal');
     }
-
-    /////////////////////////////////// Les Alertes
-    public function alertSuccess($successMessage = null)
-    {
-        $this->dispatchBrowserEvent('alert', [
-            'type' => 'success',
-            'message' => $successMessage . ' ' . 'successfully!'
-        ]);
-    }
-
-    protected function alertError($errorMessage = null)
-    {
-        $this->dispatchBrowserEvent('alert', [
-            'type' => 'error',
-            'message' => $errorMessage ?? 'An error occurred.'
-        ]);
-    }
-
-    public function alertInfo()
-    {
-        $this->dispatchBrowserEvent('alert', [
-            'type' => 'info',
-            'message' => 'Going Well!'
-        ]);
-    }
-
-    public function showAlert()
-    {
-        Alert::success('Title', 'Message');
-
-        // Vous pouvez également utiliser d'autres méthodes comme error, warning, info, etc.
-    }
-    ////////////////////////////////////Fin des Alertes
-
-    ////////////////////////////////////Les Méthodes CRUD
     public function create()
     {
         try {
@@ -138,17 +93,14 @@ class ListeProduits extends Component
                 ]
 
             );
-            $this->reinitialiser();
+            $this->reset();
             $this->emit('fermerModal');
-            $successMessage = 'Product created ';
-            $this->alertSuccess($successMessage);
+            Alert::success('Produit', 'Created Successfully');
         } catch (Exception $e) {
 
-            $this->reinitialiser();
+            $this->reset();
             $this->emit('fermerModal');
-
-            $errorMessage = $e->getMessage();
-            $this->alertError($errorMessage);
+            Alert::error('Error Title', $e->getMessage());
         }
     }
 
@@ -176,13 +128,12 @@ class ListeProduits extends Component
             $this->created_at = $this->produitDetails->created_at;
             $this->emit('openDetailsModal');
         } else {
-            abort(404, 'Produit non trouvé');
+            Alert::info('Produit', 'non trouvé');
         }
     }
 
     public function edit($id)
     {
-        $this->mode = 'edit';
 
         $this->produitDetails = Produit::find($id);
 
@@ -201,6 +152,8 @@ class ListeProduits extends Component
         $this->marqueProduit = $this->produitDetails->marqueProduit;
         $this->status = $this->produitDetails->status;
 
+
+        $this->mode = 'edit';
         $this->emit('openEditModal', $this->idProduit);
     }
 
@@ -240,16 +193,13 @@ class ListeProduits extends Component
                 'status' => $this->status,
             ]);
 
-            // Réinitialisez l'événement de réussite de la forme et émettre
-            $this->reinitialiser();
+            $this->reset();
             $this->emit('fermerModal');
-            $successMessage = 'Product updated ';
-            $this->alertSuccess($successMessage);
+            Alert::toast('Product updated successfully', 'success');
         } catch (Exception $e) {
-            $errorMessage = $e->getMessage();
-            $this->reinitialiser();
+            $this->reset();
             $this->emit('fermerModal');
-            $this->alertError($errorMessage);
+            Alert::error('Error', $e->getMessage());
         }
     }
 
@@ -258,21 +208,17 @@ class ListeProduits extends Component
         try {
             $product = Produit::find($id);
             $product->delete();
-            $successMessage = 'Product deleted';
-            $this->alertSuccess($successMessage);
+            Alert::toast('Product deleted successfully', 'success');
         } catch (Exception $e) {
-            $errorMessage = $e->getMessage();
-            $this->alertError($errorMessage);
+            Alert::error('Error', $e->getMessage());
         }
     }
-    //////////////////////////////////Fin des méthodes CRUD
 
     public function fermer()
     {
-        $this->reinitialiser();
+        $this->reset();
         $this->emit('fermerModal');
     }
-
 
     public function initOwlCarousel()
     {

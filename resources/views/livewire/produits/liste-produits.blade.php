@@ -3,9 +3,9 @@
         <h4>{{ __('Gestion des produits') }}</h4>
         <h6>{{ __('Liste des produits') }}</h6>
     </x-slot>
-    <!-- /product list -->
-    <button wire:click="showAlert">Afficher l'alerte</button>
 
+    <!-- /product list -->
+    @include('sweetalert::alert')
     <div class="card">
         <div class="card-body">
             <div class="table-top">
@@ -143,13 +143,11 @@
                                 <td>{{ $produit->quatite }}</td>
                                 <td>{{ $produit->created_at->format('d/m/Y H:i:s') }}</td>
                                 <td>
-                                    <a href="javascript:void(0);" class="btn"
-                                        wire:click='details({{ $produit->id }})'>
+                                    <a href="javascript:void(0);" class="btn" wire:click='details({{ $produit->id }})'>
                                         <img src="{{ asset('assets/img/icons/eye.svg') }}" alt="img">
                                     </a>
 
-                                    <a href="javascript:void(0);" class="btn" data-bs-toggle="modal"
-                                        wire:click='edit({{ $produit->id }})'>
+                                    <a href="javascript:void(0);" class="btn" wire:click='edit({{ $produit->id }})'>
                                         <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
                                     </a>
                                     <a href="javascript:void(0);" class="btn" wire:click='delete({{ $produit->id }})'>
@@ -170,7 +168,7 @@
     <!-- /product list -->
 
     <!-- Modal CreateAndUpdate -->
-    <div wire:ignore.self class="modal fade" id="createAndUpdateModal" tabindex="-1"
+    <div wire:ignore.self  class="modal fade" id="createAndUpdateModal" tabindex="-1"
         aria-labelledby="createAndUpdateModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -246,7 +244,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="col-lg-4 col-sm-6 col-12">
                                         <div class="form-group">
                                             <label>Sous Catégorie</label>
@@ -313,7 +310,6 @@
 
                                         </div>
                                     </div>
-
                                     <div class="col-lg-2 col-sm-6 col-12">
                                         <div class="form-group">
                                             <label>Quantité</label>
@@ -350,7 +346,7 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label> Product Image</label>
-                                            <div class="image-upload">
+                                            <div class="image-upload image-upload-new">
                                                 <input type="file" wire:model="image">
                                                 <div class="image-uploads">
                                                     @if ($mode === 'create')
@@ -366,7 +362,7 @@
                                                         @if ($image)
                                                             <img src="{{ $image->temporaryUrl() }}" width="80"
                                                                 height="80" alt="img">
-                                                        @elseif ($imageDetail)
+                                                        @elseif ($produitDetails->image)
                                                             <img src="{{ asset('storage/' . $imageDetail) }}"
                                                                 width="80" height="80" alt="img">
                                                         @else
@@ -480,8 +476,9 @@
                                         <div wire:ignore.self class="owl-carousel owl-theme product-slide"
                                             wire:after="initOwlCarousel">
                                             <div class="slider-product">
-
+                                                @if($produitDetails)
                                                 <img src="{{ asset('storage/' . $detailImage) }}" alt="img">
+                                                @endif
                                                 <h4>{{ $nomProduit }}</h4>
                                                 <h6>{{ $unit_id }}</h6>
                                             </div>
@@ -502,15 +499,45 @@
     </div>
 </div>
 
-{{-- @push('scripts')
-    <script>
-        document.addEventListener('livewire:message', event => {
-            // Utiliser SweetAlert pour afficher le message
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: event.detail.message,
+@push('scripts')
+<script>
+    document.addEventListener('livewire:load', () => {
+        Livewire.on('fermerModal', (event) => {
+            $('#createAndUpdateModal').modal('hide');
+        });
+    });
+    document.addEventListener('livewire:load', () => {
+        Livewire.on('openDetailsModal', (event) => {
+            $('#detailModal').modal('show');
+        });
+
+    });
+    document.addEventListener('livewire:load', () => {
+        Livewire.on('fermerModal', (event) => {
+            $('#editModal').modal('hide');
+        });
+    });
+    document.addEventListener('livewire:load', () => {
+        Livewire.on('openEditModal', (event) => {
+            $('#createAndUpdateModal').modal('show');
+        });
+
+    });
+    document.addEventListener('livewire:load', () => {
+        Livewire.on('openCreateModal', (event) => {
+            $('#createAndUpdateModal').modal('show');
+        });
+
+    });
+
+    document.addEventListener('livewire:load', function() {
+        Livewire.on('initOwlCarousel', function() {
+            // Initialisation du carrousel Owl Carousel
+            $('.owl-carousel').owlCarousel({
+                // Options de configuration du carrousel
             });
         });
-    </script>
-@endpush --}}
+    });
+
+</script>
+@endpush
