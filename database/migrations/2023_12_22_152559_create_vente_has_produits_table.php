@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('vente_has_produits', function (Blueprint $table) {
             $table->id();
-            $table->integer('inventaireQuantite');
-            $table->integer('etat');
-            $table->integer('quantiteReel');
-            $table->foreignId('inventaire_id')->constrained();
+            $table->integer('quantite');
+            $table->foreignId('vente_id')->constrained();
             $table->foreignId('produit_id')->constrained();
+            $table->integer('prixVente');
             $table->timestamps();
         });
     }

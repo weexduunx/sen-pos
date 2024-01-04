@@ -4,7 +4,13 @@ namespace App\Http\Livewire\Pos\Ventes;
 
 use Livewire\Component;
 use App\Models\Produit;
+use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Caisses;
+use App\Models\Vente;
+use App\Models\VenteHasProduit;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class Order extends Component
 {
@@ -23,7 +29,8 @@ class Order extends Component
 
             if ($existingProduct) {
                 // Si le produit existe déjà, incrémenter la quantité
-                $existingProduct['quantity']++;
+                Alert::toast('Produit Existant dans le panier','warning');
+                // $existingProduct['quantity']++;
             } else {
                 // Sinon, ajouter le produit au panier avec une quantité initiale de 1
                 $this->cart[] = [
@@ -76,23 +83,17 @@ class Order extends Component
 
         if ($index !== false) {
             unset($this->cart[$index]);
+            Alert::toast('Produit Enlevé avec Succées','info');
         }
-
+        
         $this->emit('cartUpdated', $this->cart);
     }
     public function clearCart()
     {
         $this->cart = []; // Vide le tableau du panier
+        Alert::toast('Panier Vidé avec Succées','info');
         $this->emit('cartUpdated', $this->cart);
     }
-
-    // public function updatedCart($value, $index)
-    // {
-    //     // Assurez-vous que la quantité est au moins égale à 1
-    //     $this->cart[$index]['quantity'] = max(1, $value);
-    //     $this->emit('cartUpdated', $this->cart);
-    // }
- 
     private function findProductIndex($productId)
     {
         foreach ($this->cart as $index => $item) {
@@ -102,6 +103,101 @@ class Order extends Component
         }
 
         return false;
+    }
+
+    // public function validerVente()
+    // {
+
+    //     $caisse = Caisses::where('user_id', Auth::user()->id)
+    //         ->where('etat', 1)->first();
+        
+    //     $latestVente = Vente::latest()->first();
+
+    //     if ($latestVente) {
+    //             $nextId = $latestVente->id + 1;
+    //     } else {
+    //             $nextId = 1;
+    //     }
+    //     // Enregistrement de la vente
+    //     $vente = new Vente();
+
+    //     $vente->dateVente = Carbon::now(); // Utilisation de Carbon pour obtenir la date actuelle
+    //     $vente->numeroVente = 'VEN-' . $vente->dateVente->format('Ymd') . '-' . str_pad($nextId, 4, '0', STR_PAD_LEFT);
+    //     // $vente->numeroVente = 'VEN-' . $vente->dateVente->format('Ymd') . '-' . str_pad((Vente::latest()->first()->id + 1), 4, '0', STR_PAD_LEFT);
+    //     $vente->caisse_id = $caisse->id;
+    //     $vente->save();
+
+        
+    //     $venteId = $vente->id;
+
+    //     // Enregistrement des produits dans la table pivot
+    //     foreach ($this->cart as $item) {
+    //         VenteHasProduit::create([
+    //             'vente_id' => $venteId,
+    //             'produit_id' => $item['id'],
+    //             'quantiteProduit' => $item['quantity'],
+    //             'prixVente' => $item['price'],
+    //         ]);
+    //     }
+
+    //     // Vous pouvez également effectuer d'autres actions nécessaires après la validation
+
+    //     // Réinitialiser le panier
+
+    //     Alert::toast('Vente Enregistré Avec Succés','success');
+    //     $this->clearCart();
+
+    //     // Vous pouvez également rediriger l'utilisateur vers une autre page ou effectuer d'autres actions nécessaires après la validation
+    // }
+    public function validerVente()
+    {
+        // Vérifier si le panier est vide
+        if (empty($this->cart)) {
+            Alert::toast('Panier Vide!!', 'warning');
+        } else {
+
+            $caisse = Caisses::where('user_id', Auth::user()->id)
+                ->where('etat', 1)->first();
+            
+            $latestVente = Vente::latest()->first();
+
+            if ($latestVente) {
+                $nextId = $latestVente->id + 1;
+            } else {
+                $nextId = 1;
+            }
+
+            // Enregistrement de la vente
+            $vente = new Vente();
+
+            $vente->dateVente = now(); // Utilisation de now() pour obtenir la date actuelle
+            // $vente->numeroVente = 'VEN-' . $vente->dateVente->format('Ymd') . '-' . str_pad($nextId, 4, '0', STR_PAD_LEFT);
+            $vente->numeroVente = 'VEN-CAI-' . $caisse->id. '-' . $vente->dateVente->format('Ymd') . '-' . str_pad($nextId, 4, '0', STR_PAD_LEFT);
+            $vente->caisse_id = $caisse->id;
+            $vente->save();
+            
+            $venteId = $vente->id;
+
+            // Enregistrement des produits dans la table pivot
+            foreach ($this->cart as $item) {
+                VenteHasProduit::create([
+                    'vente_id' => $venteId,
+                    'produit_id' => $item['id'],
+                    'quantiteProduit' => $item['quantity'],
+                    'prixVente' => $item['price'],
+                ]);
+            }
+
+            // Vous pouvez également effectuer d'autres actions nécessaires après la validation
+
+            // Réinitialiser le panier
+            $this->clearCart();
+
+            // Afficher un toast de succès
+            Alert::toast('Vente Enregistrée Avec Succès', 'success');
+
+            // Vous pouvez également rediriger l'utilisateur vers une autre page ou effectuer d'autres actions nécessaires après la validation
+        }
     }
 
     public function render()

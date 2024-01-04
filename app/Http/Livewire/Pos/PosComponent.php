@@ -15,7 +15,7 @@ class PosComponent extends Component
     protected $rules = [
         'montantOuverture' => 'required|numeric|min:0',
     ];
-
+     
      public function ouvrirCaisse()
     {
         $this->validate();

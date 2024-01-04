@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Vente extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+
+    public function produits()
+    {
+        return $this->belongsToMany(Produit::class)->withPivot('quantite');
+    }
 }

@@ -76,14 +76,22 @@
                                     {{ $header }}
                                 </div>
                                 @if (Route::currentRouteName() == 'listeProduits')
-                                    <div class="page-btn">
-                                        <button type="button" class="btn btn-added" data-bs-toggle="modal"
-                                            data-bs-target="#createModal">
-                                            <img src="{{ asset('assets/img/icons/plus.svg') }}" alt="img"
-                                                class="me-1">Add New Product
-                                        </button>
-                                    </div>
-                                @endif
+                                <div class="page-btn">
+                                    <button id="createButton" type="button" class="btn btn-added" data-bs-toggle="modal"
+                                        data-bs-target="#createAndUpdateModal">
+                                        <img src="{{ asset('assets/img/icons/plus.svg') }}" alt="img"
+                                            class="me-1">Add New Product
+                                    </button>
+                                </div>
+                                @elseif (Route::currentRouteName() == 'categories')
+                                <div class="page-btn">
+                                    <button type="button" class="btn btn-added" data-bs-toggle="modal"
+                                        data-bs-target="#AddCategorie">
+                                        <img src="{{ asset('assets/img/icons/plus.svg') }}" alt="img"
+                                            class="me-1">Create Categorie
+                                    </button>
+                                </div>
+                            @endif
                             </div>
                         @endif
                         {{ $slot }}
@@ -121,14 +129,22 @@
                                     {{ $header }}
                                 </div>
                                 @if (Route::currentRouteName() == 'listeProduits')
-                                    <div class="page-btn">
-                                        <button type="button" class="btn btn-added" data-bs-toggle="modal"
-                                            data-bs-target="#createModal">
-                                            <img src="{{ asset('assets/img/icons/plus.svg') }}" alt="img"
-                                                class="me-1">Add New Product
-                                        </button>
-                                    </div>
-                                @endif
+                                <div class="page-btn">
+                                    <button type="button" class="btn btn-added" data-bs-toggle="modal"
+                                        data-bs-target="#createAndUpdateModal">
+                                        <img src="{{ asset('assets/img/icons/plus.svg') }}" alt="img"
+                                            class="me-1">Add New Product
+                                    </button>
+                                </div>
+                                @elseif (Route::currentRouteName() == 'categories')
+                                <div class="page-btn">
+                                    <button type="button" class="btn btn-added" data-bs-toggle="modal"
+                                        data-bs-target="#AddCategorie">
+                                        <img src="{{ asset('assets/img/icons/plus.svg') }}" alt="img"
+                                            class="me-1">Create Categorie
+                                    </button>
+                                </div>
+                            @endif
                             </div>
                         @endif
                         {{ $slot }}
@@ -209,5 +225,6 @@
             </div>
         @endif
     @endguest
+
 
 </x-layouts.base>

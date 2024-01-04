@@ -7,12 +7,11 @@
             </div>
         </div>
     </div>
+    @include('sweetalert::alert')
     <div class="card border-0 shadow-sm">
         <div class="card-body">
             <div class="totalitem">
                 <h4>Total Produits : {{ count($cart) }}</h4>
-                {{-- <h4>Total Produits : 4</h4> --}}
-                {{-- <a href="">Effacer Tout</a> --}}
                 <a wire:click="clearCart">Effacer Tout</a>
             </div>
             <div class="table-responsive">
@@ -59,11 +58,11 @@
                     @endif
                 </div>
             </div>
-            <div class="card-body pt-0 pb-2 d-flex justify-content-center gap-3">
-                <button type="button" class="btn btn-warning btn-lg">Annuler</button>
-                <button type="button" class="btn btn-success btn-lg">Valider</button>
-            </div>
+           
         </div>
+    </div>
+    <div class="card border-0 shadow-sm d-flex justify-content-center gap-3">
+        <button type="button" wire:click ="validerVente" class="btn btn-success btn-lg">Valider</button>
     </div>
     <div class="card border-0 shadow-sm">
         <div class="card-body">
