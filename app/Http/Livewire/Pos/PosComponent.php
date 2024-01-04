@@ -5,6 +5,9 @@ namespace App\Http\Livewire\Pos;
 use Livewire\Component;
 use App\Models\Caisses;
 use Illuminate\Support\Facades\Auth;
+use Gloudemans\Shoppingcart\Facades\Cart;
+
+
 
 class PosComponent extends Component
 {
@@ -26,7 +29,7 @@ class PosComponent extends Component
 
         $this->reset(['montantOuverture']);
         
-        // return redirect()->route('pos');
+        return redirect()->route('pos');
     }
     public function fermerCaisse()
     {
@@ -65,12 +68,12 @@ class PosComponent extends Component
     }
     public function render()
     {
-      
         $this->hasCaisse = Caisses::where('user_id', Auth::user()->id)
                                 ->where('etat', 1)
                                 ->exists();
         $caisse = Caisses::where('user_id', Auth::user()->id)
                     ->where('etat', 1)->first();
+
         return view('livewire.pos.pos-component',['caisse' => $caisse]);
     }
 }
