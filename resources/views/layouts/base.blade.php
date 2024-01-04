@@ -66,6 +66,7 @@
 </head>
 
 <body class="font-sans antialiased">
+
     <div id="global-loader">
         <div class="whirly-loader"> </div>
     </div>
@@ -87,12 +88,12 @@
     <script src="{{ asset('assets/plugins/select2/js/select2.min.js') }}"></script>
     <!-- Owl JS -->
     <script src="{{ asset('assets/plugins/owlcarousel/owl.carousel.min.js') }}"></script>
-    <!-- Sweetalert 2 -->
+    {{-- <!-- Sweetalert 2 -->
     <script src="{{ asset('assets/plugins/sweetalert/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/sweetalert/sweetalerts.min.js') }}"></script>
     <!-- Toastr -->
     <script src="{{ asset('assets/plugins/toastr/toastr.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/toastr/toastr.js') }}"></script>
+    <script src="{{ asset('assets/plugins/toastr/toastr.js') }}"></script> --}}
     <!-- Chart JS -->
     <script src="{{ asset('assets/plugins/apexchart/apexcharts.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/apexchart/chart-data.js') }}"></script>
@@ -160,7 +161,7 @@
             });
         });
     </script>
-     <script>
+     {{-- <script>
         var SwalModal = (icon, title, html) => {
             Swal.fire({
                 icon,
@@ -284,10 +285,11 @@
                 $('#' + name).modal('show')
             });
         });
-    </script>
+    </script> --}}
     
-    
+    @include('sweetalert::alert')
     @livewireScripts
+    @stack('scripts')
 </body>
 
 </html>

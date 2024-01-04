@@ -11,6 +11,7 @@ use Livewire\Attributes\Validate;
 use Illuminate\Http\UploadedFile;
 use Exception;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ListeProduits extends Component
 {
@@ -98,6 +99,13 @@ class ListeProduits extends Component
             'type' => 'info',
             'message' => 'Going Well!'
         ]);
+    }
+
+    public function showAlert()
+    {
+        Alert::success('Title', 'Message');
+
+        // Vous pouvez également utiliser d'autres méthodes comme error, warning, info, etc.
     }
     ////////////////////////////////////Fin des Alertes
 

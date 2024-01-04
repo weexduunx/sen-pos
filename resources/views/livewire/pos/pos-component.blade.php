@@ -449,7 +449,7 @@
                                     aria-selected="false" role="tab">Return</button>
                             </li>
                         </ul>
-                        <div class="tab-content">
+                        {{-- <div class="tab-content">
                             <div class="tab-pane fade show active" id="purchase" role="tabpanel"
                                 aria-labelledby="purchase-tab">
                                 <div class="table-top">
@@ -1228,7 +1228,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

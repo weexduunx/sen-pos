@@ -60,26 +60,26 @@ class Profile extends Component
     ////////////////////////////////////Fin des Alertes
 
 
-    public function save()
-    {
+    // public function save()
+    // {
 
-        $this->validate();
-        // Stockage de l'image
-        if ($this->image) {
-            // Nom unique pour éviter les conflits
-            $imageName = time() . '.' . $this->image->getClientOriginalExtension();
+    //     $this->validate();
+    //     // Stockage de l'image
+    //     if ($this->image) {
+    //         // Nom unique pour éviter les conflits
+    //         $imageName = time() . '.' . $this->image->getClientOriginalExtension();
 
-            // Stockage de l'image dans le répertoire 'public/profiles'
-            $this->image->storeAs('public/profiles', $imageName);
+    //         // Stockage de l'image dans le répertoire 'public/profiles'
+    //         $this->image->storeAs('public/profiles', $imageName);
 
-            // Mettez à jour le chemin de l'image dans la base de données
-            $this->user->image = 'profiles/' . $imageName;
-        }
+    //         // Mettez à jour le chemin de l'image dans la base de données
+    //         $this->user->image = 'profiles/' . $imageName;
+    //     }
 
-        $this->user->update();
-        // $this->showSuccesNotification = true;
-        dd('User saved successfully', $this->user);
-    }
+    //     $this->user->save();
+    //     // $this->showSuccesNotification = true;
+    //     dd('User saved successfully', $this->user);
+    // }
 
     public function update()
     {

@@ -4,6 +4,8 @@
         <h6>{{ __('Liste des produits') }}</h6>
     </x-slot>
     <!-- /product list -->
+    <button wire:click="showAlert">Afficher l'alerte</button>
+
     <div class="card">
         <div class="card-body">
             <div class="table-top">
@@ -365,7 +367,7 @@
                                                             <img src="{{ $image->temporaryUrl() }}" width="80"
                                                                 height="80" alt="img">
                                                         @elseif ($imageDetail)
-                                                            <img src="{{ asset('/storage/' . $imageDetail) }}"
+                                                            <img src="{{ asset('storage/' . $imageDetail) }}"
                                                                 width="80" height="80" alt="img">
                                                         @else
                                                             <img src="{{ asset('assets/img/icons/upload.svg') }}"
@@ -384,14 +386,8 @@
                                         <button class="btn btn-submit me-2" type="submit"
                                             wire:loading.attr="disabled"
                                             wire:target="{{ $mode === 'create' ? 'create' : 'update' }}">
-                                            {{ $mode === 'create' ? 'Create' : 'Update' }}
                                             <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                                            {{-- <div wire:loading>
-                                                <div class="spinner-border" role="status">
-                                                    <span class="sr-only">Loading...</span>
-                                                </div>
-                                            </div> --}}
-                                            Loading...
+                                            {{ $mode === 'create' ? 'Create' : 'Update' }}
                                         </button>
                                         <button class="btn btn-cancel" type="button" wire:click="fermer">Cancel</button>
                                     </div>
@@ -506,6 +502,15 @@
     </div>
 </div>
 
-@push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-@endpush
+{{-- @push('scripts')
+    <script>
+        document.addEventListener('livewire:message', event => {
+            // Utiliser SweetAlert pour afficher le message
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: event.detail.message,
+            });
+        });
+    </script>
+@endpush --}}

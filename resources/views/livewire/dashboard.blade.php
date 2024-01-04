@@ -152,8 +152,8 @@
                   </div>
               </div>
               <div class="card-body">
-                  <div class="table-responsive dataview">
-                      <table class="table datatable ">
+                  <div class="table-responsive">
+                      <table class="table ">
                           <thead>
                               <tr>
                                   <th>Sno</th>
@@ -212,8 +212,8 @@
   <div class="card mb-0">
       <div class="card-body">
           <h4 class="card-title">Expired Products</h4>
-          <div class="table-responsive dataview">
-              <table class="table datatable ">
+          <div class="table-responsive ">
+              <table class="table  ">
                   <thead>
                       <tr>
                           <th>SNo</th>
