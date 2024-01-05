@@ -12,6 +12,7 @@ use Illuminate\Http\UploadedFile;
 use Exception;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
+use Milon\Barcode\DNS1D;
 
 class ListeProduits extends Component
 {
@@ -22,7 +23,7 @@ class ListeProduits extends Component
         $description,
         $prixAchat,
         $prixVente,
-        $codeBar,
+        $codeProduit,
         $quatite,
         $image,
         $imageDetail,
@@ -47,7 +48,7 @@ class ListeProduits extends Component
         'description' => 'required',
         'prixAchat' => 'required',
         'prixVente' => 'required',
-        'codeBar' => 'required',
+        'code_produit' => 'required',
         'quatite' => 'required',
         'image' => 'image|max:1024',
         'alertStock' => 'required',
@@ -60,11 +61,6 @@ class ListeProduits extends Component
     ];
 
 
-    public function add()
-    {
-        $this->mode = 'create';
-        $this->emit('openCreateModal');
-    }
     public function create()
     {
         try {
@@ -81,7 +77,7 @@ class ListeProduits extends Component
                     'description' => $this->description,
                     'prixAchat' => $this->prixAchat,
                     'prixVente' => $this->prixVente,
-                    'codeBar' => $this->codeBar,
+                    'code_produit' => $this->codeProduit,
                     'quatite' => $this->quatite,
                     'image' => $imagePath,
                     'alertStock' => $this->alertStock,
@@ -116,7 +112,7 @@ class ListeProduits extends Component
             $this->description = $this->produitDetails->description;
             $this->prixAchat = $this->produitDetails->prixAchat;
             $this->prixVente = $this->produitDetails->prixVente;
-            $this->codeBar = $this->produitDetails->codeBar;
+            $this->codeProduit = $this->produitDetails->code_produit;
             $this->quatite = $this->produitDetails->quatite;
             $this->detailImage = $this->produitDetails->image; // Assurez-vous d'ajuster le chemin
             $this->alertStock = $this->produitDetails->alertStock;
@@ -142,7 +138,7 @@ class ListeProduits extends Component
         $this->description = $this->produitDetails->description;
         $this->prixAchat = $this->produitDetails->prixAchat;
         $this->prixVente = $this->produitDetails->prixVente;
-        $this->codeBar = $this->produitDetails->codeBar;
+        $this->codeProduit = $this->produitDetails->code_produit;
         $this->quatite = $this->produitDetails->quatite;
         $this->imageDetail = $this->produitDetails->image;
         $this->alertStock = $this->produitDetails->alertStock;
@@ -182,7 +178,7 @@ class ListeProduits extends Component
                 'description' => $this->description,
                 'prixAchat' => $this->prixAchat,
                 'prixVente' => $this->prixVente,
-                'codeBar' => $this->codeBar,
+                'code_produit' => $this->codeProduit,
                 'quatite' => $this->quatite,
                 'image' => $imagePath,
                 'alertStock' => $this->alertStock,

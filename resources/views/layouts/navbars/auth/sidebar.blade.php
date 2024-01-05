@@ -16,16 +16,14 @@
                             <li class="@if (Route::currentRouteName() == 'listeProduits') active @endif">
                                 <a href="{{ route('listeProduits') }}" wire:navigate><i data-feather="box"></i><span>Produits</span></a>
                             </li>
-                            {{-- <li class="@if (Route::currentRouteName() == 'createProduits') active @endif"><a
-                                    href="{{ route('createProduits') }}" wire:navigate><i data-feather="plus-square"></i><span>Create
-                                        Product</span></a></li> --}}
+                            <li class="@if (Route::currentRouteName() == 'codeBar') active @endif"><a href="{{route('codeBar')}}"><i data-feather="align-justify"></i><span>Code Bar</span></a></li>
+
                             <li class="@if (Route::currentRouteName() == 'categories') active @endif">
                                 <a href="{{route('categories')}}"><i data-feather="codepen"></i><span>Categories</span></a>
                             </li>
                             <li class="@if (Route::currentRouteName() == 'units') active @endif">
                                 <a href="{{route('units')}}"><i data-feather="tag"></i><span>Units</span></a>
                             </li>
-                            <li><a href="barcode.html"><i data-feather="align-justify"></i><span>Code Bar</span></a></li>
                             <li><a href="importproduct.html"><i data-feather="minimize-2"></i><span>Importer
                                         Produits</span></a></li>
                         </ul>

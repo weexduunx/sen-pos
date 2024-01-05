@@ -11,6 +11,8 @@
         "laravel/framework": "^10.0",
         "laravel/tinker": "^2.6",
         "livewire/livewire": "^2.8",
+        "milon/barcode": "^10.0",
+        "pharaonic/livewire-select2": "^1.2",
         "realrashid/sweet-alert": "^7.1"
     },
     "require-dev": {

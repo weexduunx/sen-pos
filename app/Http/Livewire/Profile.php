@@ -33,6 +33,7 @@ class Profile extends Component
     {
         $this->user = auth()->user();
     }
+
     /////////////////////////////////// Les Alertes
     public function alertSuccess($successMessage = null)
     {
