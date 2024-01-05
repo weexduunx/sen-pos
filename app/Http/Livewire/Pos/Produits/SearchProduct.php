@@ -22,6 +22,8 @@ class SearchProduct extends Component
         $this->query = $produits->nomProduit;
         $this->produits = [];
         $this->highlightIndex = 0;
+
+        $this->resetComponent();
     }
 
     public function mount(){
@@ -32,6 +34,12 @@ class SearchProduct extends Component
         $this->query = "";
         $this->produits = [];
         $this->highlightIndex = 0;
+    }
+
+    public function resetComponent()
+    {
+        $this->resetValue();
+        // Autres réinitialisations si nécessaire
     }
     public function incrementHighLight(){
         if ($this->highlightIndex === count($this->produits) - 1){

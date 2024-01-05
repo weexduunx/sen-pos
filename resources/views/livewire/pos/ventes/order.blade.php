@@ -2,103 +2,67 @@
     <div class="card border-0 shadow-sm">
         <div class="card-body">
             <div class="col-md-12 text-danger text-center">
-                <strong style="font-size: 21px">Montant : 0 FCFA</strong>
+                <strong style="font-size: 21px">Montant : {{ $total }} FCFA</strong>
+
             </div>
         </div>
     </div>
+    @include('sweetalert::alert')
     <div class="card border-0 shadow-sm">
         <div class="card-body">
             <div class="totalitem">
-                <h4>Total Produits : 4</h4>
-                <a href="">Effacer Tout</a>
+                <h4>Total Produits : {{ count($cart) }}</h4>
+                <a wire:click="clearCart">Effacer Tout</a>
             </div>
             <div class="table-responsive">
                 <div class="product-table">
-                    <ul class="product-lists">
-                        <li>
-                            <div class="productimg">
-                                <div class="productimgs">
-                                    <img src="assets/img/product/product30.jpg" alt="img">
-                                </div>
-                                <div class="productcontet">
-                                    <h4>Pineapple 
-                                    <a href="javascript:void(0);" class="ms-2" data-bs-toggle="modal" data-bs-target="#edit"><img src="assets/img/icons/edit-5.svg" alt="img"></a>
-                                    </h4>
-                                    <div class="productlinkset">
-                                        <h5>PT001</h5>
-                                    </div>
-                                    <div class="increment-decrement">
-                                        <div class="input-groups">
-                                            <input type="button" value="-"  class="button-minus dec button">
-                                            <input type="text" name="child"  value="0" class="quantity-field">
-                                            <input type="button" value="+"  class="button-plus inc button ">
+                    @if ($cart && count($cart) > 0)
+                        @foreach ($cart as $item)
+                            <ul class="product-lists">
+                                <li>
+                                    <div class="productimg">
+                                        <div class="productimgs">
+                                            <img src="{{ asset('storage/' . $item['image']) }}" alt="img">
+                                        </div>
+                                        <div class="productcontet">
+                                            <h4>{{ $item['name'] }}</h4>
+                                            <div class="productlinkset">
+                                                <h5>{{ $item['codeBar'] }}</h5>
+                                            </div>
+                                            <div class="increment-decrement">
+                                                <div class="input-groups">
+                                                    <button wire:click="decrementQuantity({{ $item['id'] }})"
+                                                        class="button-minus dec button">-</button>
+                                                    <input type="text" name="child" value="{{ $item['quantity'] }}"
+                                                        class="quantity-field">
+                                                    <button wire:click="incrementQuantity({{ $item['id'] }})"
+                                                        class="button-plus inc button">+</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>3000.00	</li>
-                        <li><a class="confirm-text" href="javascript:void(0);"><img src="assets/img/icons/delete-2.svg" alt="img"></a></li>
-                    </ul>
-                    <ul class="product-lists">
-                        <li>
-                            <div class="productimg">
-                                <div class="productimgs">
-                                    <img src="assets/img/product/product30.jpg" alt="img">
-                                </div>
-                                <div class="productcontet">
-                                    <h4>Pineapple 
-                                    <a href="javascript:void(0);" class="ms-2" data-bs-toggle="modal" data-bs-target="#edit"><img src="assets/img/icons/edit-5.svg" alt="img"></a>
-                                    </h4>
-                                    <div class="productlinkset">
-                                        <h5>PT001</h5>
-                                    </div>
-                                    <div class="increment-decrement">
-                                        <div class="input-groups">
-                                            <input type="button" value="-"  class="button-minus dec button">
-                                            <input type="text" name="child"  value="0" class="quantity-field">
-                                            <input type="button" value="+"  class="button-plus inc button ">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>3000.00	</li>
-                        <li><a class="confirm-text" href="javascript:void(0);"><img src="assets/img/icons/delete-2.svg" alt="img"></a></li>
-                    </ul>
-                    <ul class="product-lists">
-                        <li>
-                            <div class="productimg">
-                                <div class="productimgs">
-                                    <img src="assets/img/product/product30.jpg" alt="img">
-                                </div>
-                                <div class="productcontet">
-                                    <h4>Pineapple 
-                                    <a href="javascript:void(0);" class="ms-2" data-bs-toggle="modal" data-bs-target="#edit"><img src="assets/img/icons/edit-5.svg" alt="img"></a>
-                                    </h4>
-                                    <div class="productlinkset">
-                                        <h5>PT001</h5>
-                                    </div>
-                                    <div class="increment-decrement">
-                                        <div class="input-groups">
-                                            <input type="button" value="-"  class="button-minus dec button">
-                                            <input type="text" name="child"  value="0" class="quantity-field">
-                                            <input type="button" value="+"  class="button-plus inc button ">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>3000.00	</li>
-                        <li><a class="confirm-text" href="javascript:void(0);"><img src="assets/img/icons/delete-2.svg" alt="img"></a></li>
-                    </ul>
+                                </li>
+                                <li>{{ $item['price'] }}</li>
+                                <li><a wire:click="removeProduct({{ $item['id'] }})" class="confirm-text"
+                                        href="javascript:void(0);"><img src="assets/img/icons/delete-2.svg"
+                                            alt="img"></a></li>
+                            </ul>
+                        @endforeach
+                    @else
+                        {{-- <p>Aucun produit dans le panier pour le moment.</p> --}}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>Attention!</strong>Aucun produit dans le panier pour le moment.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                    @endif
                 </div>
             </div>
-            <div class="card-body pt-0 pb-2 d-flex justify-content-center gap-3">
-                <button type="button" class="btn btn-warning btn-lg">Annuler</button>
-                <button type="button" class="btn btn-success btn-lg">Valider</button>
-            </div>
+           
         </div>
+    </div>
+    <div class="card border-0 shadow-sm d-flex justify-content-center gap-3">
+        <button type="button" wire:click ="validerVente" class="btn btn-success btn-lg">Valider</button>
     </div>
     <div class="card border-0 shadow-sm">
         <div class="card-body">

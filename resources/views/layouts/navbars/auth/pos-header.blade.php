@@ -220,8 +220,8 @@
                         <img src="{{ asset('assets/img/profiles/avator1.jpg') }}" alt="" class="img-fluid">
                     </span>
                     <span class="user-detail">
-                        <span class="user-name">John Smilga</span>
-                        <span class="user-role">Super Admin</span>
+                        <span class="user-name">{{ auth()->user()->name }}</span>
+                        <span class="user-role">Vendeur</span>
                     </span>
                 </span>
             </a>
@@ -232,12 +232,12 @@
                                 alt="">
                             <span class="status online"></span></span>
                         <div class="profilesets">
-                            <h6>John Smilga</h6>
-                            <h5>Super Admin</h5>
+                            <h6>{{ auth()->user()->name }}</</h6>
+                            <h5>Vendeur</h5>
                         </div>
                     </div>
                     <hr class="m-0">
-                    <a class="dropdown-item" href="profile.html"> <svg xmlns="http://www.w3.org/2000/svg"
+                    <a class="dropdown-item" href="{{route('profile')}}" wire:navigate> <svg xmlns="http://www.w3.org/2000/svg"
                             width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="feather feather-user me-2">
@@ -254,7 +254,7 @@
                             </path>
                         </svg>Settings</a>
                     <hr class="m-0">
-                    <a class="dropdown-item logout pb-0" href="signin.html"><img
+                    <a class="dropdown-item logout pb-0" href="{{ route('logout') }}"><img
                             src="{{ asset('assets/img/icons/log-out.svg') }}" class="me-2"
                             alt="img">Logout</a>
                 </div>
