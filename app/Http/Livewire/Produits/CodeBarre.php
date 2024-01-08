@@ -86,7 +86,11 @@ class CodeBarre extends Component
                 'valeur_code_barre' => $this->selectedProduct->code_produit,
                 'type_code_barre' => $type,
             ]);
+            // Récupération de l'id du code-barre nouvellement créé
+            $codeBarreId = $codeBarre->id;
 
+            // Mettre à jour le produit associé avec l'id du code-barre
+            $this->selectedProduct->update(['code_barre_id' => $codeBarreId]);
             // Attribution de la valeur à la propriété
             $this->imagePath = $barcodeImage;
         }

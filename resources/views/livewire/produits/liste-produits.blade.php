@@ -415,13 +415,15 @@
                     <!-- /add -->
                     <div class="row">
                         <div class="col-lg-8 col-sm-12">
-                            <div class="card">
+                            <div class="card"> 
                                 <div class="card-body">
-                                    <div class="bar-code-view">
-                                        <img src="{{ asset('assets/img/barcode1.png') }}" alt="barcode">
-                                        <a class="printimg">
-                                            <img src="{{ asset('assets/img/icons/printer.svg') }}" alt="print">
-                                        </a>
+                                    <div class="card flex-fill bg-white bar-code-view">
+                                        @if (empty($barcodeImage))
+                                            <img src="{{ asset('assets/img/barcode2.png') }}" alt="Image not available">
+                                            @else 
+                                            <img src="data:image/png;base64,{{ $barcodeImage }}" alt="barcode ">
+                                            <h6>{{ $codeProduit }}</h6>
+                                        @endif
                                     </div>
                                     <div class="productdetails">
                                         <ul class="product-bar">
@@ -478,8 +480,8 @@
                                                 @if($produitDetails)
                                                 <img src="{{ asset('storage/' . $detailImage) }}" alt="img">
                                                 @endif
-                                                <h4>{{ $nomProduit }}</h4>
-                                                <h6>{{ $unit_id }}</h6>
+                                                <h4 class="card-title mb-0 text-center">{{ $nomProduit }}</h4>
+                                                <h6 class="card-text">{{ $unit_id }}</h6>
                                             </div>
                                         </div>
                                     </div>
