@@ -116,12 +116,15 @@
                             </div>
                         </div>
                         <div class="col-12 col-md-3 col-sm-12 col-xs-12">
-                            <div class="card flex-fill bg-white">
+                            <div class="card flex-fill bg-white bar-code-view">
                                 @if ($selectedProduct && $imagePath)
                                     <h5 class="text-center">{{ $selectedProduct->nomProduit }}</h5>
                                     <img src="data:image/png;base64,{{ $imagePath }}" alt="Barcode"
                                         class="card-img-top">
                                     <h5 class="text-center">{{ $selectedProduct->code_produit }}</h5>
+                                @else
+                                <img src="{{ asset('assets/img/lecteur-de-code-barres.png') }}" alt="Barcode"
+                                class="card-img-top">
                                 @endif
                             </div>
                         </div>
@@ -137,9 +140,9 @@
                         <div class="wordset">
                             <ul>
                                 <li>
-                                    <button class="btn btn-primary btn-sm" data-bs-toggle="tooltip"
+                                    <button class="btn btn-primary btn-sm printimg" data-bs-toggle="tooltip"
                                         data-bs-placement="top" title="imprimer" data-bs-original-title="imprimer"
-                                        aria-label="imprimer" onclick="imprimerCodesBarres()">
+                                        aria-label="imprimer" onclick="imprimerCodesBarres()" type="button">
                                         <i class="bi bi-printer"></i>
                                         Imprimer
                                     </button>
@@ -148,13 +151,15 @@
                         </div>
                     </div>
                     <hr>
-                    <div  class="row">
+                    <div  class="row" id="barcodeContainer">
                         @if ($selectedProduct && !empty($imagePath))
                             @for ($i = 0; $i < $selectedProduct->quatite; $i++)
-                                <div class="col-md-4 mb-4" id="codesBarresContainer{{ $i }}">
-                                    <div class="card flex-fill bg-white">
+                                <div class="col-md-4 mb-4" >
+                                    <div class="bar-code-view">
+                                        <h5 class="text-center">{{ $selectedProduct->nomProduit }}</h5>
                                         <img alt="Code-barre" src="data:image/png;base64,{{ $imagePath }}"
                                             class="card-img-top">
+                                        <h5 class="text-center">{{ $selectedProduct->code_produit }}</h5>
                                     </div>
                                 </div>
                             @endfor
@@ -169,34 +174,43 @@
         $quantityToPrint = $selectedProduct ? $selectedProduct->quatite : 0;
     @endphp
 </div>
+@push('styles')
+<style>
+    .barcode-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .barcode-card {
+        flex: 0 0 calc(33.33% - 20px); /* Pour avoir 3 éléments par ligne */
+        margin-bottom: 20px;
+    }
+</style>
+@endpush
 @push('scripts')
     <script>
         window.addEventListener('codeBarreSelected', event => {
             document.querySelector('#hideCard').style.display = 'none';
         })
         function imprimerCodesBarres() {
-        // Ouvrir une nouvelle fenêtre pour l'impression
-        var printWindow = window.open('', '_blank');
+            var container = document.getElementById('barcodeContainer');
+            var barcodes = container.getElementsByClassName('card');
 
-        // Construire le contenu HTML à imprimer
-        @if ($selectedProduct)
-            @for ($i = 0; $i < $selectedProduct->quatite; $i++)
-                var container{{ $i }} = document.getElementById('codesBarresContainer{{ $i }}');
-                var htmlContent{{ $i }} = container{{ $i }} ? container{{ $i }}.innerHTML : '';
-            @endfor
-        @endif
+            var combinedHtml = '';
 
-        // Remplacer le contenu de la nouvelle fenêtre par le contenu HTML
-        printWindow.document.write('<html><head><title>Impression des Codes Barres</title></head><body>');
-        @if ($selectedProduct)
-            @for ($i = 0; $i < $selectedProduct->quatite; $i++)
-                printWindow.document.write(htmlContent{{ $i }});
-            @endfor
-        @endif
-        printWindow.document.write('</body></html>');
+            for (var i = 0; i < barcodes.length; i++) {
+                combinedHtml += '<div class="barcode-card">' + barcodes[i].outerHTML + '</div>';
+            }
 
-        // Imprimer le contenu
-        printWindow.print();
+            var barcodeWindow = window.open('', '_blank');
+            barcodeWindow.document.write('<html><head><title>Codes-barres</title>');
+            barcodeWindow.document.write('<style>body { display: flex; flex-wrap: wrap; justify-content: space-between; }</style>');
+            barcodeWindow.document.write('</head><body>');
+            barcodeWindow.document.write(combinedHtml);
+            barcodeWindow.document.write('</body></html>');
+            barcodeWindow.document.close();
+            barcodeWindow.print();
         }
     </script>
 @endpush

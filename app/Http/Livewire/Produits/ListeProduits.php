@@ -38,7 +38,8 @@ class ListeProduits extends Component
         $erreurMessage,
         $nomCategorie,
         $created_at,
-        $idProduit;
+        $idProduit,
+        $barcodeImage;
     public $sousCategories = [];
     public $categories = [];
     public $show = false;
@@ -114,7 +115,12 @@ class ListeProduits extends Component
             $this->prixVente = $this->produitDetails->prixVente;
             $this->codeProduit = $this->produitDetails->code_produit;
             $this->quatite = $this->produitDetails->quatite;
-            $this->detailImage = $this->produitDetails->image; // Assurez-vous d'ajuster le chemin
+            $this->detailImage = $this->produitDetails->image;
+            if ($this->produitDetails && $this->produitDetails->codeBarre) {
+                $this->barcodeImage = $this->produitDetails->codeBarre->barcode_chemin_img;
+            } else {
+                $this->barcodeImage = null; // ou définissez une valeur par défaut
+            }
             $this->alertStock = $this->produitDetails->alertStock;
             $this->sousCategorie_id = $this->produitDetails->sousCategorie_id;
             $this->nomCategorie = $this->produitDetails->categorie->nomCategorie;
