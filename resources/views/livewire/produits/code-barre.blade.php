@@ -52,13 +52,13 @@
                             <ul>
                                 <li>
                                     <button wire:click="generateBarcode('C39')" type="button"
-                                        class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top"
+                                        class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top"
                                         title="Générer Code Barre" data-bs-original-title="Générer Code Barre"
                                         aria-label="Code Barre">
                                         <i class="bi bi-upc-scan"></i> Code Barre
                                     </button>
                                 </li>
-                                <li>
+                                {{-- <li>
                                     <button wire:click="generateBarcode('QRCODE')" type="button"
                                         class="btn btn-secondary btn-sm" data-bs-toggle="tooltip"
                                         data-bs-placement="top" title="Générer QR Code"
@@ -75,7 +75,7 @@
                                         </svg>
                                         QR Code
                                     </button>
-                                </li>
+                                </li> --}}
                             </ul>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                             </div>
                         </div>
                         <div class="col-12 col-md-3 col-sm-12 col-xs-12">
-                            <div class="card flex-fill bg-white bar-code-view">
+                            <div class="card flex-fill bg-white">
                                 @if ($selectedProduct && $imagePath)
                                     <h5 class="text-center">{{ $selectedProduct->nomProduit }}</h5>
                                     <img src="data:image/png;base64,{{ $imagePath }}" alt="Barcode"
@@ -140,7 +140,7 @@
                         <div class="wordset">
                             <ul>
                                 <li>
-                                    <button class="btn btn-primary btn-sm printimg" data-bs-toggle="tooltip"
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="tooltip"
                                         data-bs-placement="top" title="imprimer" data-bs-original-title="imprimer"
                                         aria-label="imprimer" onclick="imprimerCodesBarres()" type="button">
                                         <i class="bi bi-printer"></i>
@@ -155,7 +155,7 @@
                         @if ($selectedProduct && !empty($imagePath))
                             @for ($i = 0; $i < $selectedProduct->quatite; $i++)
                                 <div class="col-md-4 mb-4" >
-                                    <div class="bar-code-view">
+                                    <div class="card flex-fill bg-white">
                                         <h5 class="text-center">{{ $selectedProduct->nomProduit }}</h5>
                                         <img alt="Code-barre" src="data:image/png;base64,{{ $imagePath }}"
                                             class="card-img-top">
