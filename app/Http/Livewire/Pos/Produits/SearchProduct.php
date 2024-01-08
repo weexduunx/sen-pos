@@ -57,7 +57,7 @@ class SearchProduct extends Component
     public function updatedQuery()
     {
         $this->produits = Produit::where('nomProduit', 'like', '%'. $this->query .'%')
-            ->orwhere('codeBar', 'like', '%'.$this->query .'%')
+            ->orwhere('code_produit', 'like', '%'.$this->query .'%')
             ->get();
     }
 

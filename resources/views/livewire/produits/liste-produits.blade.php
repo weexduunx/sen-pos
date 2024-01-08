@@ -276,12 +276,11 @@
                                     </div>
                                     <div class="col-lg-4 col-sm-6 col-12">
                                         <div class="form-group">
-                                            <label>Code Bar</label>
-                                            <input type="text" wire:model='codeBar'>
-                                            @error('codeBar')
+                                            <label>Code Produit</label>
+                                            <input type="text" wire:model='codeProduit'>
+                                            @error('codeProduit')
                                                 <span class="error">{{ $message }}</span>
-                                            @enderror
-
+                                            @enderror <br>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 col-sm-6 col-12">

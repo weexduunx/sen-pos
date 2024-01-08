@@ -14,7 +14,8 @@ class Produit extends Model
         'description',
         'prixAchat',
         'prixVente',
-        'codeBar',
+        'code_produit',
+        'code_barre_id',
         'quatite',
         'image',
         'alertStock',
@@ -33,5 +34,10 @@ class Produit extends Model
     public function sousCategorie()
     {
         return $this->belongsTo(sousCategories::class, 'sous_categorie_id');
+    }
+
+    public function codeBarre()
+    {
+        return $this->hasOne(CodeBarre::class, 'valeur_code_barre', 'code_produit');
     }
 }
