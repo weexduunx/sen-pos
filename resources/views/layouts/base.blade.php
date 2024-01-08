@@ -23,6 +23,9 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+{{-- 
+    <!-- POS ticket  CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/ticket.css') }}"> --}}
 
     <!-- Animation CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
@@ -100,6 +103,19 @@
  
     @stack('scripts')
     @livewireScripts
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            this.livewire.on('closeModal', (name) => {
+                $('#' + name).modal('hide')
+            });
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            this.livewire.on('openModal', (name) => {
+                $('#' + name).modal('show')
+            });
+        });
+    </script>
 </body>
 
 </html>

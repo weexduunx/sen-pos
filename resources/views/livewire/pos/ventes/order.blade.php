@@ -49,7 +49,6 @@
                             </ul>
                         @endforeach
                     @else
-                        {{-- <p>Aucun produit dans le panier pour le moment.</p> --}}
                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
                             <strong>Attention!</strong>Aucun produit dans le panier pour le moment.
                             <button type="button" class="btn-close" data-bs-dismiss="alert"
@@ -93,4 +92,43 @@
             </div>
         </div>
     </div>
+    <!-- Modal pour les informations de paiement -->
+    <div wire:ignore.self class="modal fade" id="InfosPaiement" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-mg modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Informations de Paiement</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Contenu Livewire -->
+                    @livewire('pos.ventes.infos-paiement')
+                </div>
+            </div>
+        </div>
+    </div>
+    <div wire:ignore.self class="modal fade" id="ShowPOS" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-mg modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ticket de Caisse</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Contenu Livewire -->
+                    @livewire('pos.ventes.pos-ticket')
+
+                    {{-- <button wire:click="imprimerPOS" >Imprimer POS</button> --}}
+                    <button wire:click="imprimerPOS" class="btn btn-success">
+                        <img src="assets/img/icons/printer.svg" alt="Imprimer" class="mr-2"> Imprimer POS
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </div>

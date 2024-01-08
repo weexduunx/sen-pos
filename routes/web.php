@@ -64,5 +64,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/listeProduits', ListeProduits::class)->name('listeProduits');
     Route::get('/categories', CategoriesProduits::class)->name('categories');
     Route::get('/units', Units::class)->name('units');
+    Route::view('/ticket','pos.pos-ticket')->name('ticket');
+
     // Route::get('/listeProduits/{id}', [ListeProduits::class, 'details'])->name('produits.details');
 });

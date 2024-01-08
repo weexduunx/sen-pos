@@ -10,11 +10,12 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Caisses;
 use App\Models\Vente;
 use App\Models\VenteHasProduit;
+
 use RealRashid\SweetAlert\Facades\Alert;
 
 class Order extends Component
 {
-    protected $listeners = ['produitSelected'];
+    protected $listeners = ['produitSelected','paiementEnregistre'];
     public $idProduit, $produit;
     public $produits;
     public $cart = [];
@@ -105,50 +106,6 @@ class Order extends Component
         return false;
     }
 
-    // public function validerVente()
-    // {
-
-    //     $caisse = Caisses::where('user_id', Auth::user()->id)
-    //         ->where('etat', 1)->first();
-        
-    //     $latestVente = Vente::latest()->first();
-
-    //     if ($latestVente) {
-    //             $nextId = $latestVente->id + 1;
-    //     } else {
-    //             $nextId = 1;
-    //     }
-    //     // Enregistrement de la vente
-    //     $vente = new Vente();
-
-    //     $vente->dateVente = Carbon::now(); // Utilisation de Carbon pour obtenir la date actuelle
-    //     $vente->numeroVente = 'VEN-' . $vente->dateVente->format('Ymd') . '-' . str_pad($nextId, 4, '0', STR_PAD_LEFT);
-    //     // $vente->numeroVente = 'VEN-' . $vente->dateVente->format('Ymd') . '-' . str_pad((Vente::latest()->first()->id + 1), 4, '0', STR_PAD_LEFT);
-    //     $vente->caisse_id = $caisse->id;
-    //     $vente->save();
-
-        
-    //     $venteId = $vente->id;
-
-    //     // Enregistrement des produits dans la table pivot
-    //     foreach ($this->cart as $item) {
-    //         VenteHasProduit::create([
-    //             'vente_id' => $venteId,
-    //             'produit_id' => $item['id'],
-    //             'quantiteProduit' => $item['quantity'],
-    //             'prixVente' => $item['price'],
-    //         ]);
-    //     }
-
-    //     // Vous pouvez également effectuer d'autres actions nécessaires après la validation
-
-    //     // Réinitialiser le panier
-
-    //     Alert::toast('Vente Enregistré Avec Succés','success');
-    //     $this->clearCart();
-
-    //     // Vous pouvez également rediriger l'utilisateur vers une autre page ou effectuer d'autres actions nécessaires après la validation
-    // }
     public function validerVente()
     {
         // Vérifier si le panier est vide
@@ -191,13 +148,27 @@ class Order extends Component
             // Vous pouvez également effectuer d'autres actions nécessaires après la validation
 
             // Réinitialiser le panier
-            $this->clearCart();
+            // $this->clearCart();
+
+            $this->emit('venteValidee', $venteId);
+
+            $this->emit('openModal', 'InfosPaiement',['venteId' => $venteId]);
 
             // Afficher un toast de succès
-            Alert::toast('Vente Enregistrée Avec Succès', 'success');
+            // Alert::toast('Vente Enregistrée Avec Succès', 'success');
+            // $this->clearCart();
 
             // Vous pouvez également rediriger l'utilisateur vers une autre page ou effectuer d'autres actions nécessaires après la validation
         }
+    }
+    public function paiementEnregistre($venteId)
+    {
+        // Mettez en œuvre les actions nécessaires après l'enregistrement du paiement
+        $this->venteId = $venteId;
+        // Autres actions...
+
+        // Ouvrir le modal "ShowPOS" après l'enregistrement du paiement
+        $this->emit('openModal', 'ShowPOS', ['venteId' => $venteId]);
     }
 
     public function render()
